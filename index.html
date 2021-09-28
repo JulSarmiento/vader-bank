@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <title>SImulador Interactivo</title>
+</head>
+<body>
+  <header>
+    <h1>Simulador Interactivo</h1>
+  </header>
+  
+  <main class="excerise-container">
+    <section>
+      <h2>Simulador de banco</h2>
+      <p>Con el simulador podras realizar las siguientes operaciones:</p>
+      <ul>
+        <li>Ingresar nuevo usuario.</li>
+        <li>'Login' Para ver tu balance y realizar transferencia.</li>
+      </ul>
+
+      <button id="signin">Nuevo Usuario.</button> 
+      <button id="login">Login</button> 
+        
+    </section>
+
+    <section class="balance">
+      <h3 id="user-name"></h3>
+      <p>El balance de tu cuenta es:</p>
+      <p id="balance"></p>
+
+      <button id="transfer">Transferir</button>
+
+      <div>
+        <h4>Movimientos:</h4>
+        <p id="transactions"></p>
+      </div>
+
+    </section>
+
+  </main>
+  <footer>By julie</footer>
+
+  <script src="index.js"></script>
+</body>
+
+
+</html>
