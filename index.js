@@ -110,14 +110,12 @@ function transaction(){
     alert(`'${moneyToTransfer}' no son caracteres validos, por favor ingrese el monto a transferir.`);
   } else {
     moneyToTransfer = parseFloat(moneyToTransfer);
-    let balanceValidated = validateBalance(moneyToTransfer);
-
-    if(balanceValidated === true){
+    
+    if(validateBalance(moneyToTransfer)){
 
       let userToTransfer = prompt('Por favor ingrese el usuario al que desee realizar la transferencia.')
-      let validatedUser = validateUser(userToTransfer);
-
-      if(validatedUser === true){
+  
+      if(validateUser(userToTransfer)){
         alert(`La transaccion realizada a ${userToTransfer} por ${MONEY_FORMAT.format(moneyToTransfer)}, fue realizada con EXITO.`)
 
         BALANACE.innerHTML = `${MONEY_FORMAT.format(usersSaves - moneyToTransfer)}`
