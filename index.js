@@ -19,6 +19,8 @@ let usersSaves = Math.round(Math.random()*1000000); // Es el dinero disponible e
 
 /**
  * This function adds a new user to the users array with a simple validation.
+ * 
+ * @listens element:signin:click click event on element signin.
  */
 function addNewUser(){
   let newUserName = prompt('Por favor ingrese su nombre y su apellido.');
@@ -37,6 +39,8 @@ function addNewUser(){
 
 /**
  * This function simulates a login, it's show the user name and the random balance in the acount.
+ * 
+ * @listens element:login:click click event on element login.
  */
 function loginUser(){
   let login = prompt('Por favor ingrese su usuario:');
@@ -58,9 +62,10 @@ function loginUser(){
 }
 
 /**
- * This Function Validate if the balance in the user acount is enogh for the transfer
- * @param {*} value 
- * @returns boolean
+ * This Function Validate if the balance in the user acount is enough for the transfer
+ * 
+ * @param {number} value - User input the amount of money.
+ * @returns {boolean}
  */
 function validateBalance(value){
 
@@ -73,8 +78,9 @@ function validateBalance(value){
 
 /**
  * This Function Validates if the user to transfer exist.
- * @param {} value 
- * @returns 
+ * 
+ * @param {string} value - user writes the username  
+ * @returns {boolean}
  */
 function validateUser(value){
   let search = users.includes(value);
@@ -90,6 +96,8 @@ function validateUser(value){
 
 /**
  * This function generate a money transfer from an user to another.
+ * 
+ * @listens element:transfer:click click event on element transfer
  */
 function transaction(){
   let moneyToTransfer = prompt('Por favor ingrese el monto a transferir:');
@@ -123,8 +131,7 @@ function transaction(){
 
 }
   
-
-// Button's events
+// // Button's events
 SIGN_IN.addEventListener('click', addNewUser);
 LOG_IN.addEventListener('click', loginUser);
 TRANSFER.addEventListener('click', transaction);
