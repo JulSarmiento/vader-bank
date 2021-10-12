@@ -38,7 +38,7 @@ function loginUser(){
   if(!askDni || !askPassword){
     return
   } 
-  
+
   AuthFactory.login(askDni, askPassword);
  }
 
@@ -51,7 +51,22 @@ function loginUser(){
     alert('No ha iniciado sesion.');
   } else{
     AuthFactory.logOut();
+  
   }
+ }
+
+
+ function transaction(){
+
+   const dniToTransfer = parseInt(prompt('Ingrese el DNI del usuario a transferir:'));
+   const amount = parseInt(prompt('Ingrese el monto a transferir:'));
+
+   if(!dniToTransfer || !amount){
+     return
+   } else{
+    Transactions.transfer(dniToTransfer, amount);
+   }
+
  }
 
 // // Button's events
@@ -60,7 +75,7 @@ window.addEventListener('load', () => {
   logInBtn.addEventListener('click', loginUser);
   logOutBtn.addEventListener('click', logoutUser);
   deleteBtn.addEventListener('click', deleteU );
-  // TRANSFER.addEventListener('click', transaction);
+  transferBtn.addEventListener('click', transaction);
 } )
 
 

@@ -10,6 +10,8 @@ class User{
     this.email = email;
     this.password = password;
     this.balance = Math.round(Math.random()*1000000);
+    this.movements = [];
+
   }
 }
 
@@ -18,12 +20,19 @@ class User{
  */
 class UserFactory{
 
-  static users = [];
+  static users = [
+    new User('Julieth Sarmiento', 28, 1140862112, 'jasa1999@hotmail.com', 'cancer19' ),
+    new User('Habib Manzur', 30, 1140845884, 'habibmanazur@hotmail.com', 'geminis06'),
+    new User('Bebe Vader', 18, 927, 'vader@hotmail.com', 'minimichi')
+  ];
+
+  static currentUser;
 
   /**
    * This Fuction find a user by his dni
    */
   static fineOne(dni){
+    dni = parseInt(dni);
     return UserFactory.users.find(user => dni == user.dni)
   }
   
@@ -105,6 +114,7 @@ class AuthFactory{
     let validator = UserFactory.users.find(user => dni == user.dni && password === user.password);
 
     if(validator){
+      UserFactory.currentUser = validator;
       USER_NAME.innerHTML = `Bienvenido ${validator.name}`;
       BALANACE.innerHTML = `${MONEY_FORMAT.format(validator.balance)}`;
     } else{
@@ -116,9 +126,10 @@ class AuthFactory{
    * This function simulates a logout.
    */
   static logOut(){
+    UserFactory.currentUser = null;
     USER_NAME.innerHTML = ``;
     BALANACE.innerHTML = ``;
-    TRANSFER.innerHTML = ``;
+    TRANSACTIONS.innerHTML = ``;
   }
 
 }

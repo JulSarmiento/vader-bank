@@ -1,15 +1,25 @@
 class Transactions{
-  static trasanctios = [];
 
-  static transfer(userToTransfer, amout){
+  static transfer(dniToTransfer, amout){
+    
+    const toTransferUser = UserFactory.fineOne(dniToTransfer)
 
-  // validar que el usuario a transferir exista.
-  // validar que la cantidad a trasnferir no sea mayor al balance del usuario que trasnfiere.
-  // Generar la trasnferencia 
-  // Descontar el valor transferido al balance del usuario quie transfirio 
-  // Sumarle el valor trasnferido al usuario que recibe la transferencia
-  // Imprimir "{usuario a transferir}, {monto} y {fecha}" de igual forma debe aparecer como salgo positivo en el usurio que recibio.
+    if(dniToTransfer !== toTransferUser.dni){
+      alert('Usuario no encontrado. Por favor revise la informacion ingresada.');
+    } else{ 
 
+      if(amout > UserFactory.currentUser.balance){
+        alert('No posee los fondos para realizar la transferencia.')
+      } else {
+        alert(`La transferencia fue exitosa.`);
+        UserFactory.currentUser.movements.push(`Transferencia realizada a ${toTransferUser.name} por ${MONEY_FORMAT.format(amout)}.`)
+        console.log(UserFactory.currentUser.movements);
+        toTransferUser.balance += amout;
+        toTransferUser.movements.push(`Transferencia recibida de ${UserFactory.currentUser.name} por ${MONEY_FORMAT.format(amout)}.`)
+        BALANACE.innerHTML = UserFactory.currentUser.balance -= amout
+        TRANSACTIONS.innerHTML = UserFactory.currentUser.movements;
+      }
+    }
 
   }
 }
