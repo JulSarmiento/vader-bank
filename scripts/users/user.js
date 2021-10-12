@@ -33,6 +33,7 @@ class UserFactory{
   
   static addNewUser(){
 
+    // Start asking the dni to validate if the user exist or not for allowing to create a new user.
     let dni = prompt('Por favor ingrese su numero de cedula:');
 
     if(isNaN(dni)){
@@ -69,7 +70,7 @@ class UserFactory{
       return
     };
 
-    alert(`Bienvenido/a ${name}, su nuevo usuario es: ${username}.`);
+    alert(`Bienvenido/a ${name}, esperamos que su experiencia en nuestro banco sea digna de sus expectativas.`);
     const user = new User(name, age, dni, email, password, User.balance);
     UserFactory.users.push(user);
     return user
@@ -97,8 +98,15 @@ class UserFactory{
  */
 class AuthFactory{
 
-  static login(username, password){
+  static login(dni, password){
+    let validator = UserFactory.users.find(user => dni == user.dni && password === user.password);
 
+    if(validator){
+      USER_NAME.innerHTML = `Bienvenido ${validator.name}`;
+      BALANACE.innerHTML = `${MONEY_FORMAT.format(validator.balance)}`;
+    } else{
+      alert('Usuario o contraseña erroneo, por favor, vuelva a ientar');
+    }
   }
 
   static logOut(){

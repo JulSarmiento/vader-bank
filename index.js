@@ -1,8 +1,13 @@
 // buttons
 const signInBtn = document.getElementById('signin');
-// const LOG_IN = document.getElementById('login');
+const logIn = document.getElementById('login');
 const deleteBtn = document.getElementById('delete');
 // const TRANSFER = document.getElementById('transfer');
+
+// tags for print the information
+const BALANACE = document.getElementById('balance');
+const TRANSACTIONS = document.getElementById('transactions');
+const USER_NAME = document.getElementById('user-name');
 
 // Money formater
 const OPTION = {style : 'currency', currency: 'COP'}; 
@@ -20,10 +25,22 @@ function deleteU(){
   console.log(UserFactory.users);
 }
 
+function loginUser(){
+  const askDni = parseInt(prompt('Ingrese su dni:'));
+  const askPassword = prompt('Ingrse su contraseña:');
+
+  if(!askDni || !askPassword){
+    return
+  } 
+  
+  AuthFactory.login(askDni, askPassword);
+
+}
+
 // // Button's events
 window.addEventListener('load', () => {
   signInBtn.addEventListener('click', UserFactory.addNewUser);
-  // LOG_IN.addEventListener('click', loginUser);
+  logIn.addEventListener('click', loginUser);
   deleteBtn.addEventListener('click', deleteU );
   // TRANSFER.addEventListener('click', transaction);
 } )
