@@ -1,8 +1,9 @@
 // buttons
 const signInBtn = document.getElementById('signin');
-const logIn = document.getElementById('login');
+const logInBtn = document.getElementById('login');
+const logOutBtn = document.getElementById('logout');
 const deleteBtn = document.getElementById('delete');
-// const TRANSFER = document.getElementById('transfer');
+const transferBtn = document.getElementById('transfer');
 
 // tags for print the information
 const BALANACE = document.getElementById('balance');
@@ -13,7 +14,9 @@ const USER_NAME = document.getElementById('user-name');
 const OPTION = {style : 'currency', currency: 'COP'}; 
 const MONEY_FORMAT = new Intl.NumberFormat('es-CO', OPTION); 
   
-
+/**
+ * This function validates before call the delete function in UserFactory Class
+ */
 function deleteU(){
   const userToFind = prompt('Ingrese el numero de cedula:')
 
@@ -25,6 +28,9 @@ function deleteU(){
   console.log(UserFactory.users);
 }
 
+/**
+ * This function validates before call the login function in AuthFactory Class
+ */
 function loginUser(){
   const askDni = parseInt(prompt('Ingrese su dni:'));
   const askPassword = prompt('Ingrse su contraseña:');
@@ -36,10 +42,23 @@ function loginUser(){
   AuthFactory.login(askDni, askPassword);
  }
 
+ /**
+ * This function validates before call the logout function in AuthFactory Class
+ */
+ function logoutUser(){
+
+  if(!loginUser){
+    alert('No ha iniciado sesion.');
+  } else{
+    AuthFactory.logOut();
+  }
+ }
+
 // // Button's events
 window.addEventListener('load', () => {
   signInBtn.addEventListener('click', UserFactory.addNewUser);
-  logIn.addEventListener('click', loginUser);
+  logInBtn.addEventListener('click', loginUser);
+  logOutBtn.addEventListener('click', logoutUser);
   deleteBtn.addEventListener('click', deleteU );
   // TRANSFER.addEventListener('click', transaction);
 } )

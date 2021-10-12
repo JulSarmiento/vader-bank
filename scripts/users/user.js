@@ -66,7 +66,7 @@ class UserFactory{
 
     const password = prompt('Ingrese una contraseña:');
 
-    if(!name || !age || !dni || !email || !password){
+    if(!name || !age || !dni || !email || !password || name === null || age === null){
       return
     };
 
@@ -98,6 +98,9 @@ class UserFactory{
  */
 class AuthFactory{
 
+  /**
+   * This function simulate a login finding if a user match the dni and the password, and shows the username, the balance and the movments in the acount
+   */
   static login(dni, password){
     let validator = UserFactory.users.find(user => dni == user.dni && password === user.password);
 
@@ -109,8 +112,13 @@ class AuthFactory{
     }
   }
 
+  /**
+   * This function simulates a logout.
+   */
   static logOut(){
-
+    USER_NAME.innerHTML = ``;
+    BALANACE.innerHTML = ``;
+    TRANSFER.innerHTML = ``;
   }
 
 }
