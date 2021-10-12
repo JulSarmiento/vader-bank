@@ -34,8 +34,7 @@ function loginUser(){
   } 
   
   AuthFactory.login(askDni, askPassword);
-
-}
+ }
 
 // // Button's events
 window.addEventListener('load', () => {
