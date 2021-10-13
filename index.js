@@ -13,14 +13,15 @@ const USER_NAME = document.getElementById('user-name');
 // Money formater
 const OPTION = {style : 'currency', currency: 'COP'}; 
 const MONEY_FORMAT = new Intl.NumberFormat('es-CO', OPTION); 
-  
+
+
 /**
  * This function validates before call the delete function in UserFactory Class
  */
 function deleteU(){
   const userToFind = prompt('Ingrese el numero de cedula:')
 
-  if(userToFind === null || !userToFind){
+  if(!userToFind){
     return
   }
 
@@ -47,25 +48,35 @@ function loginUser(){
  */
  function logoutUser(){
 
-  if(!loginUser){
+  if(!UserFactory.currentUser){
     alert('No ha iniciado sesion.');
+
   } else{
     AuthFactory.logOut();
   
   }
  }
 
-
+ /**
+ * This function validates before call the transfer function in Transaction Class
+ */
  function transaction(){
 
-   const dniToTransfer = parseInt(prompt('Ingrese el DNI del usuario a transferir:'));
-   const amount = parseInt(prompt('Ingrese el monto a transferir:'));
+  if(!UserFactory.currentUser){
 
-   if(!dniToTransfer || !amount){
-     return
-   } else{
+    return;
+  };
+
+  const dniToTransfer = parseInt(prompt('Ingrese el DNI del usuario a transferir:'));
+
+  if(!dniToTransfer){
+    return
+
+  } else{
+    const amount = parseInt(prompt('Ingrese el monto a transferir:'));
     Transactions.transfer(dniToTransfer, amount);
-   }
+
+  }
 
  }
 
