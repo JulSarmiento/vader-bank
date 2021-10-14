@@ -2,6 +2,14 @@
  * This is the user class
  */
 class User{
+  /**
+   * 
+   * @param {string} name 
+   * @param {number} age 
+   * @param {number} dni 
+   * @param {string} email 
+   * @param {string} password 
+   */
   constructor(name, age, dni , email, password){
     this.id;
     this.name = name;
@@ -20,29 +28,39 @@ class User{
  */
 class UserFactory{
 
-  // an array with setted objects for test
+  /**
+   * Set the users array. Contains some users for testing.
+   */
   static users = [
     new User('Julieth Sarmiento', 28, 1140862112, 'jasa1999@hotmail.com', '885388' ),
     new User('Habib Manzur', 30, 1140845884, 'habibmanazur@hotmail.com', 'geminis06'),
     new User('Bebe Vader', 18, 927, 'vader@hotmail.com', 'minimichi')
   ];
 
-  // This variable contains the "logged"
+  /**
+   * The variable that contains the "logged" user.
+   */
   static currentUser;
 
   /**
-   * This Fuction find a user by his dni
+   * This function find de user by its DNI number
+   * @param {number} dni 
+   * @returns {object} the user found.
    */
-  static fineOne(dni){
+  static findOne(dni){
     dni = parseInt(dni);
     return UserFactory.users.find(user => dni == user.dni)
   }
   
   /**
-   * This function add a new user.
+   * This function adds a new user
+   * @returns {object} returns the created user.
+   * @function findOne
+   * 
+   * @listens signInBtn
    */
   static addNewUser() {
-    // debugger
+    
     const dni = prompt('Por favor ingrese su numero de cedula:');
 
     if(!dni){
@@ -54,7 +72,7 @@ class UserFactory{
       return UserFactory.addNewUser();
     }
     
-    if(UserFactory.fineOne(dni) ){
+    if(UserFactory.findOne(dni) ){
       alert('El usuario ya existe.');
       return;
     }
@@ -87,7 +105,8 @@ class UserFactory{
   }
 
   /**
-   * This function deletes a existent user.
+   * This function deletes a user by his DNI.
+   * @param {number} dni 
    */
   static deleteUser(dni){
  
@@ -104,12 +123,14 @@ class UserFactory{
 }
 
 /**
- * This class mangane all the auth process for the users like login and logout
+ * This class mangane all the auth process for the users like login and logout.
  */
 class AuthFactory{
 
   /**
    * This function simulate a login finding if a user match the dni and the password, and shows the username, the balance and the movments in the acount
+   * @param {number} dni 
+   * @param {string} password 
    */
   static login(dni, password){
     let validator = UserFactory.users.find(user => dni == user.dni && password === user.password);
@@ -120,7 +141,7 @@ class AuthFactory{
       BALANACE.innerHTML = `${MONEY_FORMAT.format(validator.balance)}`;
       TRANSACTIONS.innerHTML = `${UserFactory.currentUser.movements}`
     } else{
-      alert('Usuario o contraseña erroneo, por favor, vuelva a ientar');
+      alert('Contraseña erroneo, por favor, vuelva a ientar');
     }
   }
 
