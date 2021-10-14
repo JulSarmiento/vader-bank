@@ -6,24 +6,26 @@ class Transactions{
   /**
    * This function allows transfer money to another existen user and update the balance for both users and push the information in the movements array.
    * @param {number} dniToTransfer 
-   * @param {number} amount 
    * 
    * @function findOne
    */
-  static transfer(dniToTransfer, amount){
+  static transfer(dniToTransfer){
     
-    const toTransferUser = UserFactory.findOne(dniToTransfer)
+    const toTransferUser = UserFactory.findOne(dniToTransfer);
 
-    if(dniToTransfer !== toTransferUser.dni){
+    if(toTransferUser === undefined){
       alert('Usuario no encontrado. Por favor revise la informacion ingresada.');
 
     } else{ 
+      
+      let amount = parseInt(prompt('Ingrese el monto a transferir (no emplear puntos (.) ni comas (,)):'));
 
       if(amount > UserFactory.currentUser.balance){
-        alert('No posee los fondos para realizar la transferencia.')
+        alert('No posee los fondos para realizar la transferencia.');
 
       } else {
         alert(`La transferencia fue exitosa.`);
+        TRANSACTIONS.innerHTML = '';
 
         let newBalanceUserTransfering = UserFactory.currentUser.balance -= amount;
         toTransferUser.balance += amount;
@@ -31,9 +33,17 @@ class Transactions{
         UserFactory.currentUser.movements.push(`Transferencia realizada a ${toTransferUser.name} por ${MONEY_FORMAT.format(amount)}.`);
         toTransferUser.movements.push(`Transferencia recibida por ${UserFactory.currentUser.name} por ${MONEY_FORMAT.format(amount)}.`);
 
-        BALANACE.innerHTML = MONEY_FORMAT.format(newBalanceUserTransfering)
-        TRANSACTIONS.innerHTML = UserFactory.currentUser.movements
-      }
+        UserFactory.currentUser.movements.forEach(movement => {
+          const li = document.createElement('li');
+          const content = movement;
+          const text = document.createTextNode(content);
+          li.appendChild(text);
+          TRANSACTIONS.appendChild(li);
+        });
+        
+        BALANACE.innerHTML = MONEY_FORMAT.format(newBalanceUserTransfering);
+
+      }       
     }
 
   }

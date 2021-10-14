@@ -30,7 +30,7 @@ function deleteU(){
   const userToFind = prompt('Ingrese el numero de cedula:');
 
   if(!userToFind){
-    return
+    return;
   }
   
   if(userToFind != UserFactory.currentUser.dni){
@@ -41,7 +41,6 @@ function deleteU(){
     AuthFactory.logOut();
     console.log(UserFactory.users);
   }
-
 
 }
 
@@ -56,16 +55,16 @@ function loginUser(){
   const askDni = parseInt(prompt('Ingrese su dni:'));
 
   if(!askDni){
-    return
+    return;
   } 
 
   if(!UserFactory.findOne(askDni)){
-    alert('El usuario indicado no existe.')
+    alert('El usuario indicado no existe.');
   } else{
-    const askPassword = prompt('Ingrse su contraseña:');
+    const askPassword = prompt('Ingrese su contraseña:');
   
     if(!askPassword){
-      return
+      return;
     }
   
     AuthFactory.login(askDni, askPassword);
@@ -99,26 +98,24 @@ function loginUser(){
  function transaction(){
 
   if(!UserFactory.currentUser){
-
     return;
+
   };
 
   const dniToTransfer = parseInt(prompt('Ingrese el DNI del usuario a transferir:'));
 
   if(!dniToTransfer){
-    return
+    return;
 
   } 
   
   if(dniToTransfer === UserFactory.currentUser.dni){
     alert('No es posible realizar una transferencia a tu misma cuenta.');
-
-  } else{
-    const amount = parseInt(prompt('Ingrese el monto a transferir:'));
-    Transactions.transfer(dniToTransfer, amount);
-
+    
+  } else {
+    Transactions.transfer(dniToTransfer);
   }
-
+  
  }
 
 /**

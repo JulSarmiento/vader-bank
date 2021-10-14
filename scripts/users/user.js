@@ -49,7 +49,7 @@ class UserFactory{
    */
   static findOne(dni){
     dni = parseInt(dni);
-    return UserFactory.users.find(user => dni == user.dni)
+    return UserFactory.users.find(user => dni == user.dni);
   }
   
   /**
@@ -64,7 +64,7 @@ class UserFactory{
     const dni = prompt('Por favor ingrese su numero de cedula:');
 
     if(!dni){
-      return
+      return;
     }
 
     if(isNaN(dni)){
@@ -81,9 +81,11 @@ class UserFactory{
     const age = prompt('Ingrese su edad:');
     
     if(!name || !age){
-      return
+      return;
 
-    } else if(isNaN(age)){
+    } 
+    
+    if(isNaN(age)){
       alert('Por favor ingrese unicamente numeros.');
 
     } else if(age < 18){
@@ -94,13 +96,13 @@ class UserFactory{
       const password = prompt('Ingrese una contraseña:');
 
       if(!email || !password){
-        return
+        return;
       }
 
       const user = new User(name, age, dni, email, password, User.balance);
       UserFactory.users.push(user);
       alert(`Bienvenido/a ${name}, esperamos que su experiencia en nuestro banco sea digna de sus expectativas.`);
-      return user
+      return user;
     }
   }
 
@@ -112,9 +114,10 @@ class UserFactory{
  
     const index = UserFactory.users.findIndex(user => dni == user.dni);
 
-      if (index >= 0) {
-      UserFactory.users.splice(index, 1)
-      alert(`El usuario ${dni} fue eliminado. `)
+    if (index >= 0) {
+      UserFactory.users.splice(index, 1);
+      alert(`El usuario ${dni} fue eliminado. `);
+
     } else {
       alert('El usuario no existe');
     }
@@ -139,7 +142,14 @@ class AuthFactory{
       UserFactory.currentUser = validator;
       USER_NAME.innerHTML = `Bienvenido ${validator.name}`;
       BALANACE.innerHTML = `${MONEY_FORMAT.format(validator.balance)}`;
-      TRANSACTIONS.innerHTML = `${UserFactory.currentUser.movements}`
+      UserFactory.currentUser.movements.forEach(movement => {
+        const li = document.createElement('li');
+        const content = movement;
+        const text = document.createTextNode(content);
+        li.appendChild(text);
+        TRANSACTIONS.appendChild(li);
+      });
+
     } else{
       alert('Contraseña erroneo, por favor, vuelva a ientar');
     }
@@ -150,7 +160,7 @@ class AuthFactory{
    */
   static logOut(){
     UserFactory.currentUser = null;
-    USER_NAME.innerHTML = ``;
+    USER_NAME.innerHTML = '';
     BALANACE.innerHTML = ``;
     TRANSACTIONS.innerHTML = ``;
   }
