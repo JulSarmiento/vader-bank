@@ -127,6 +127,10 @@ class UserFactory{
     console.log(orderedUsers);
   
     orderedUsers.forEach(user => {
+      if (user === UserFactory.currentUser) {
+        return
+      }
+      
       const li = document.createElement('li');
       const content = user.name;
       const text = document.createTextNode(content);
@@ -193,6 +197,7 @@ class AuthFactory{
     DomFactory.getUsername().innerHTML = '';
     DomFactory.getBalance().innerHTML = ``;
     DomFactory.getTransactions().innerHTML = ``;
+    DomFactory.getUsersList().innerHTML = '';
   }
 
 }
