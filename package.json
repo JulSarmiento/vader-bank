@@ -1,0 +1,23 @@
+{
+  "name": "simulador-interactivo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "firebase": "^9.1.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulSarmiento/simulador-interactivo.git"
+  },
+  "author": "JulSarmiento",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JulSarmiento/simulador-interactivo/issues"
+  },
+  "homepage": "https://github.com/JulSarmiento/simulador-interactivo#readme"
+}
