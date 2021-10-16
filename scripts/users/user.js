@@ -9,6 +9,8 @@ class User{
    * @param {number} dni 
    * @param {string} email 
    * @param {string} password 
+   * @param {number} balance
+   * @param {array} movements 
    */
   constructor(name, age, dni , email, password){
     this.id;
@@ -32,9 +34,15 @@ class UserFactory{
    * Set the users array. Contains some users for testing.
    */
   static users = [
-    new User('Julieth Sarmiento', 28, 1140862112, 'jasa1999@hotmail.com', '885388' ),
-    new User('Habib Manzur', 30, 1140845884, 'habibmanazur@hotmail.com', 'geminis06'),
-    new User('Bebe Vader', 18, 927, 'vader@hotmail.com', 'minimichi')
+    new User ('Julieth Sarmiento', 28, 1140862112, 'jasa1999@hotmail.com', '885388' ),
+    new User ('Habib Manzur', 30, 1140845884, 'habibmanazur@hotmail.com', 'geminis06'),
+    new User ('Bebe Vader', 18, 927, 'vader@hotmail.com', 'minimichi'),
+    new User ('Maria Martinez', 45, 1234567891, 'mariaMartinez@hotmail.com','1234'),
+    new User ('Eduardo Vergara', 35, 2345678912, 'eduardoVergara@hotmail.com','1234'),
+    new User ('Ana Mileta Mejia', 33, 3456789123, 'anamilenamejia@hotmail.com','1234'),
+    new User ('Edelmira Ahumada', 27, 4567891234, 'edelAhumada@hotmail.com','1234'),
+    new User ('Daniel Quintero', 24, 5678912345, 'danielquintero@hotmail.com','1234'),
+    new User ('Oscar Muñoz', 27, 6789123456, 'oscarmuñoz@hotmail.com','1234')
   ];
 
   /**
@@ -104,6 +112,23 @@ class UserFactory{
       alert(`Bienvenido/a ${name}, esperamos que su experiencia en nuestro banco sea digna de sus expectativas.`);
       return user;
     }
+
+  }
+
+  static printUsers(){
+    
+  }
+
+  /**
+   * This function order the user's array by name.
+   */
+  static orderUserByName(){
+      
+    const orderedUsers = User.users.sort((a,b) => {
+      return a.name.localeCompare(b.name)
+    });
+  
+    console.log(orderedUsers);
   }
 
   /**
