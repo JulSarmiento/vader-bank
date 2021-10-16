@@ -115,20 +115,24 @@ class UserFactory{
 
   }
 
-  static printUsers(){
-    
-  }
-
   /**
    * This function order the user's array by name.
    */
   static orderUserByName(){
       
-    const orderedUsers = User.users.sort((a,b) => {
+    const orderedUsers = UserFactory.users.sort((a,b) => {
       return a.name.localeCompare(b.name)
     });
-  
+    
     console.log(orderedUsers);
+  
+    orderedUsers.forEach(user => {
+      const li = document.createElement('li');
+      const content = user.name;
+      const text = document.createTextNode(content);
+      li.appendChild(text);
+      DomFactory.getUsersList().appendChild(li);
+    })
   }
 
   /**
@@ -165,14 +169,15 @@ class AuthFactory{
 
     if(validator){
       UserFactory.currentUser = validator;
-      USER_NAME.innerHTML = `Bienvenido ${validator.name}`;
-      BALANACE.innerHTML = `${MONEY_FORMAT.format(validator.balance)}`;
+      DomFactory.getUsername().innerHTML = `Bienvenido ${validator.name}`;
+      DomFactory.getBalance().innerHTML = `${MONEY_FORMAT.format(validator.balance)}`;
+      UserFactory.orderUserByName();
       UserFactory.currentUser.movements.forEach(movement => {
         const li = document.createElement('li');
         const content = movement;
         const text = document.createTextNode(content);
         li.appendChild(text);
-        TRANSACTIONS.appendChild(li);
+        DomFactory.getTransactions().appendChild(li);
       });
 
     } else{
@@ -185,9 +190,9 @@ class AuthFactory{
    */
   static logOut(){
     UserFactory.currentUser = null;
-    USER_NAME.innerHTML = '';
-    BALANACE.innerHTML = ``;
-    TRANSACTIONS.innerHTML = ``;
+    DomFactory.getUsername().innerHTML = '';
+    DomFactory.getBalance().innerHTML = ``;
+    DomFactory.getTransactions().innerHTML = ``;
   }
 
 }

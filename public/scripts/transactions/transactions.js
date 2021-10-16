@@ -25,7 +25,7 @@ class Transactions{
 
       } else {
         alert(`La transferencia fue exitosa.`);
-        TRANSACTIONS.innerHTML = '';
+        DomFactory.getTransactions().innerHTML = '';
 
         let newBalanceUserTransfering = UserFactory.currentUser.balance -= amount;
         toTransferUser.balance += amount;
@@ -38,10 +38,10 @@ class Transactions{
           const content = movement;
           const text = document.createTextNode(content);
           li.appendChild(text);
-          TRANSACTIONS.appendChild(li);
+          DomFactory.getTransactions().appendChild(li);
         });
         
-        BALANACE.innerHTML = MONEY_FORMAT.format(newBalanceUserTransfering);
+        DomFactory.getBalance().innerHTML = MONEY_FORMAT.format(newBalanceUserTransfering);
 
       }       
     }

@@ -1,14 +1,87 @@
-// buttons
-const signInBtn = document.getElementById('signin');
-const logInBtn = document.getElementById('login');
-const logOutBtn = document.getElementById('logout');
-const deleteBtn = document.getElementById('delete');
-const transferBtn = document.getElementById('transfer');
+/**
+ * This class was built with singleton pattern because the global const wass returning null.
+ */
+class DomFactory{
+  static _BALANACE;
+  static _TRANSACTIONS;
+  static _USER_NAME;
+  static _USER_LIST;
 
-// tags for print the information
-const BALANACE = document.getElementById('balance');
-const TRANSACTIONS = document.getElementById('transactions');
-const USER_NAME = document.getElementById('user-name');
+  static getUsersList() {
+    if (!DomFactory._USER_LIST) {
+      DomFactory._USER_LIST =  document.getElementById('users-list');
+    }
+
+    return DomFactory._USER_LIST;
+  }
+
+  static getTransactions() {
+    if (!DomFactory._TRANSACTIONS) {
+      DomFactory._TRANSACTIONS =  document.getElementById('transactions');
+    }
+
+    return DomFactory._TRANSACTIONS;
+  }
+
+  static getUsername() {
+    if (!DomFactory._USER_NAME) {
+      DomFactory._USER_NAME =  document.getElementById('user-name');
+    }
+
+    return DomFactory._USER_NAME;
+  }
+
+  static getBalance() {
+    if (!DomFactory._BALANACE) {
+      DomFactory._BALANACE =  document.getElementById('balance');
+    }
+
+    return DomFactory._BALANACE;
+  }
+
+}
+
+/**
+ * This envent
+ */
+window.addEventListener('load', () => {
+  // buttons
+  const signInBtn = document.getElementById('signin');
+  const logInBtn = document.getElementById('login');
+  const logOutBtn = document.getElementById('logout');
+  const deleteBtn = document.getElementById('delete');
+  const transferBtn = document.getElementById('transfer');
+
+  /**
+   * Event button on click
+   * @fires addNewUser
+   */
+  signInBtn.addEventListener('click', UserFactory.addNewUser);
+
+  /**
+   * Event button on click
+   * @fires loginUser
+   */
+  logInBtn.addEventListener('click', loginUser);
+
+  /**
+   * Event button on click
+   * @fires logoutUser
+   */
+  logOutBtn.addEventListener('click', logoutUser);
+
+  /**
+   * Event button on click
+   * @fires deleteU
+   */
+  deleteBtn.addEventListener('click', deleteU );
+
+  /**
+   * Event button on click
+   * @fires transactions 
+   */
+  transferBtn.addEventListener('click', transaction);
+})
 
 // Money formater
 const OPTION = {style : 'currency', currency: 'COP'}; 
@@ -118,40 +191,7 @@ function loginUser(){
   
  }
 
-/**
- * This envent
- */
-window.addEventListener('load', () => {
-  /**
-   * Event button on click
-   * @fires addNewUser
-   */
-  signInBtn.addEventListener('click', UserFactory.addNewUser);
 
-  /**
-   * Event button on click
-   * @fires loginUser
-   */
-  logInBtn.addEventListener('click', loginUser);
-
-  /**
-   * Event button on click
-   * @fires logoutUser
-   */
-  logOutBtn.addEventListener('click', logoutUser);
-
-  /**
-   * Event button on click
-   * @fires deleteU
-   */
-  deleteBtn.addEventListener('click', deleteU );
-
-  /**
-   * Event button on click
-   * @fires transactions 
-   */
-  transferBtn.addEventListener('click', transaction);
-} )
 
 
 
