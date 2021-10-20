@@ -34,15 +34,15 @@ class UserFactory{
    * Set the users array. Contains some users for testing.
    */
   static users = [
-    new User ('Julieth Sarmiento', 28, 1140862112, 'jasa1999@hotmail.com', '885388' ),
-    new User ('Habib Manzur', 30, 1140845884, 'habibmanazur@hotmail.com', 'geminis06'),
-    new User ('Bebe Vader', 18, 927, 'vader@hotmail.com', 'minimichi'),
-    new User ('Maria Martinez', 45, 1234567891, 'mariaMartinez@hotmail.com','1234'),
-    new User ('Eduardo Vergara', 35, 2345678912, 'eduardoVergara@hotmail.com','1234'),
-    new User ('Ana Mileta Mejia', 33, 3456789123, 'anamilenamejia@hotmail.com','1234'),
-    new User ('Edelmira Ahumada', 27, 4567891234, 'edelAhumada@hotmail.com','1234'),
-    new User ('Daniel Quintero', 24, 5678912345, 'danielquintero@hotmail.com','1234'),
-    new User ('Oscar Muñoz', 27, 6789123456, 'oscarmuñoz@hotmail.com','1234')
+    // new User ('Julieth Sarmiento', 28, 1140862112, 'jasa1999@hotmail.com', '885388' ),
+    // new User ('Habib Manzur', 30, 1140845884, 'habibmanazur@hotmail.com', 'geminis06'),
+    // new User ('Bebe Vader', 18, 927, 'vader@hotmail.com', 'minimichi'),
+    // new User ('Maria Martinez', 45, 1234567891, 'mariaMartinez@hotmail.com','1234'),
+    // new User ('Eduardo Vergara', 35, 2345678912, 'eduardoVergara@hotmail.com','1234'),
+    // new User ('Ana Mileta Mejia', 33, 3456789123, 'anamilenamejia@hotmail.com','1234'),
+    // new User ('Edelmira Ahumada', 27, 4567891234, 'edelAhumada@hotmail.com','1234'),
+    // new User ('Daniel Quintero', 24, 5678912345, 'danielquintero@hotmail.com','1234'),
+    // new User ('Oscar Muñoz', 27, 6789123456, 'oscarmuñoz@hotmail.com','1234')
   ];
 
   /**
@@ -67,50 +67,30 @@ class UserFactory{
    * 
    * @listens signInBtn
    */
-  static addNewUser() {
+  static addNewUser(fullname, age, email, dniNumber, password, rePassword) {
     
-    const dni = prompt('Por favor ingrese su numero de cedula:');
-
-    if(!dni){
-      return;
-    }
-
-    if(isNaN(dni)){
-      alert('Por favor ingrese unicamente numeros.');
-      return UserFactory.addNewUser();
-    }
-    
-    if(UserFactory.findOne(dni) ){
+    if(UserFactory.findOne(dniNumber) ){
       alert('El usuario ya existe.');
       return;
     }
     
-    const name = prompt('Ingrese su nombre y apellido:');
-    const age = prompt('Ingrese su edad:');
-    
-    if(!name || !age){
-      return;
-
-    } 
-    
-    if(isNaN(age)){
-      alert('Por favor ingrese unicamente numeros.');
-
-    } else if(age < 18){
+    if(age < 18){
       alert('El usuario debe ser mayor de edad para abrir una cuenta con nosotros.');
 
     } else {
-      const email = prompt('Ingrese su correo electronico:');
-      const password = prompt('Ingrese una contraseña:');
 
-      if(!email || !password){
-        return;
+      if(password !== rePassword){
+        alert('Las contraseñas no son iguales.'); 
+      } else{ 
+        const user = new User(fullname, age, dniNumber, email, password, User.balance, User.movements);
+        UserFactory.users.push(user);
+        alert(`Bienvenido/a ${fullname}, esperamos que su experiencia en nuestro banco sea digna de sus expectativas.`);
+
+        DomFactory.getSigninForm().classList.toggle('hide');
+        localStorage.setItem('Users', JSON.stringify(UserFactory.users));
+        return user;
       }
 
-      const user = new User(name, age, dni, email, password, User.balance);
-      UserFactory.users.push(user);
-      alert(`Bienvenido/a ${name}, esperamos que su experiencia en nuestro banco sea digna de sus expectativas.`);
-      return user;
     }
 
   }
@@ -119,41 +99,53 @@ class UserFactory{
    * This function order the user's array by name.
    */
   static orderUserByName(){
-      
+
     const orderedUsers = UserFactory.users.sort((a,b) => {
       return a.name.localeCompare(b.name)
     });
-    
-    console.log(orderedUsers);
-  
+
     orderedUsers.forEach(user => {
-      if (user === UserFactory.currentUser) {
-        return
-      }
-      
-      const li = document.createElement('li');
-      const content = user.name;
-      const text = document.createTextNode(content);
-      li.appendChild(text);
-      DomFactory.getUsersList().appendChild(li);
+
+      if (user.dni == UserFactory.currentUser.dni) {
+        return;
+        
+      } else {
+        const li = document.createElement('li');
+        const content = user.name;
+        const text = document.createTextNode(content);
+        li.appendChild(text);
+        DomFactory.getUsersList().appendChild(li);
+      }      
+
     })
   }
 
   /**
    * This function deletes a user by his DNI.
-   * @param {number} dni 
+   * @param {number} dniNumberToDelete 
    */
-  static deleteUser(dni){
- 
-    const index = UserFactory.users.findIndex(user => dni == user.dni);
+  static deleteUser(dniNumberToDelete){
 
-    if (index >= 0) {
-      UserFactory.users.splice(index, 1);
-      alert(`El usuario ${dni} fue eliminado. `);
-
+    if(dniNumberToDelete != UserFactory.currentUser.dni){
+      alert('No es posible elimintar una cuenta diferente a la tuya.');
+  
     } else {
-      alert('El usuario no existe');
+
+      const index = UserFactory.users.findIndex(user => dniNumberToDelete == user.dni);
+
+      if (index >= 0) {
+        UserFactory.users.splice(index, 1);
+        alert(`El usuario ${dniNumberToDelete} fue eliminado.`);
+        console.log(UserFactory.users);
+        AuthFactory.logOut();
+
+      } else {
+        alert('El usuario no existe');
+
+      }
     }
+ 
+
   }
 
 }
@@ -169,13 +161,24 @@ class AuthFactory{
    * @param {string} password 
    */
   static login(dni, password){
+
     let validator = UserFactory.users.find(user => dni == user.dni && password === user.password);
 
     if(validator){
+
       UserFactory.currentUser = validator;
+
+      localStorage.setItem('Current-User', UserFactory.currentUser.dni);
+
       DomFactory.getUsername().innerHTML = `Bienvenido ${validator.name}`;
+
       DomFactory.getBalance().innerHTML = `${MONEY_FORMAT.format(validator.balance)}`;
+
       UserFactory.orderUserByName();
+
+      DomFactory.getTransactions().innerHTML = '';
+
+      localStorage.setItem('Users', JSON.stringify(UserFactory.users));
       UserFactory.currentUser.movements.forEach(movement => {
         const li = document.createElement('li');
         const content = movement;
@@ -183,6 +186,8 @@ class AuthFactory{
         li.appendChild(text);
         DomFactory.getTransactions().appendChild(li);
       });
+
+      DomFactory.getLoggedPanel().classList.toggle('hide');
 
     } else{
       alert('Contraseña erroneo, por favor, vuelva a ientar');
@@ -194,10 +199,8 @@ class AuthFactory{
    */
   static logOut(){
     UserFactory.currentUser = null;
-    DomFactory.getUsername().innerHTML = '';
-    DomFactory.getBalance().innerHTML = ``;
-    DomFactory.getTransactions().innerHTML = ``;
-    DomFactory.getUsersList().innerHTML = '';
+    DomFactory.getLoggedPanel().classList.toggle('hide');
+    DomFactory.getUsersList().innerHTML= '';
   }
 
 }

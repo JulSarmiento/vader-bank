@@ -9,8 +9,8 @@ class Transactions{
    * 
    * @function findOne
    */
-  static transfer(dniToTransfer){
-    
+  static transfer(dniToTransfer, amount){
+    debugger
     const toTransferUser = UserFactory.findOne(dniToTransfer);
 
     if(toTransferUser === undefined){
@@ -18,8 +18,6 @@ class Transactions{
 
     } else{ 
       
-      let amount = parseInt(prompt('Ingrese el monto a transferir (no emplear puntos (.) ni comas (,)):'));
-
       if(amount > UserFactory.currentUser.balance){
         alert('No posee los fondos para realizar la transferencia.');
 
@@ -33,6 +31,8 @@ class Transactions{
         UserFactory.currentUser.movements.push(`Transferencia realizada a ${toTransferUser.name} por ${MONEY_FORMAT.format(amount)}.`);
         toTransferUser.movements.push(`Transferencia recibida por ${UserFactory.currentUser.name} por ${MONEY_FORMAT.format(amount)}.`);
 
+        DomFactory.getTransactions().innerHTML = '';
+        localStorage.setItem('Users', JSON.stringify(UserFactory.users));
         UserFactory.currentUser.movements.forEach(movement => {
           const li = document.createElement('li');
           const content = movement;

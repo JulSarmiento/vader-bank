@@ -23,3 +23,9 @@ button {
     border: none;
 
 }
+/* general  */
+
+.hide{
+    display: none;
+}
+

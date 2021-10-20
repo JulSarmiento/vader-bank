@@ -1,11 +1,16 @@
 /**
- * This class was built with singleton pattern because the global const wass returning null.
+ * This class was built with singleton pattern because the global const was returning null.
  */
 class DomFactory{
   static _BALANACE;
   static _TRANSACTIONS;
   static _USER_NAME;
   static _USER_LIST;
+  static _LOGGED_PANEL;
+  static _SIGNIN_FORM;
+  static _lOGIN_FORM;
+  static _TRANSFER_FORM;
+  static _DELETE_FORM;
 
   static getUsersList() {
     if (!DomFactory._USER_LIST) {
@@ -39,6 +44,46 @@ class DomFactory{
     return DomFactory._BALANACE;
   }
 
+  static getLoggedPanel() {
+    if (!DomFactory._LOGGED_PANEL) {
+      DomFactory._LOGGED_PANEL =  document.getElementById('logged-panel');
+    }
+
+    return DomFactory._LOGGED_PANEL;
+  }
+
+  static getSigninForm() {
+    if (!DomFactory._SIGNIN_FORM) {
+      DomFactory._SIGNIN_FORM =  document.getElementById('signin-form');
+    }
+
+    return DomFactory._SIGNIN_FORM;
+  }
+
+  static getLoginForm() {
+    if (!DomFactory._lOGIN_FORM) {
+      DomFactory._lOGIN_FORM =  document.getElementById('login-form');
+    }
+
+    return DomFactory._lOGIN_FORM;
+  }
+
+  static getTransferForm(){
+    if (!DomFactory._TRANSFER_FORM) {
+      DomFactory._TRANSFER_FORM =  document.getElementById('transfer-form');
+    }
+
+    return DomFactory._TRANSFER_FORM;
+  }
+
+  static getDeleteForm(){
+    if (!DomFactory._DELETE_FORM) {
+      DomFactory._DELETE_FORM =  document.getElementById('delete-user-form');
+    }
+
+    return DomFactory._DELETE_FORM;
+  }
+
 }
 
 /**
@@ -52,142 +97,139 @@ window.addEventListener('load', () => {
   const deleteBtn = document.getElementById('delete');
   const transferBtn = document.getElementById('transfer');
 
+  // Getting data from the local storage
+  const dataStored = localStorage.getItem('Users');
+  const dataCurrentUser = localStorage.getItem('Current-User');
+
+  if(dataStored){
+    UserFactory.users = JSON.parse(dataStored);
+    UserFactory.users.forEach((user) =>{
+      console.log(user)
+    })
+  }
+
+  if(dataCurrentUser){
+    UserFactory.currentUser = JSON.parse(dataCurrentUser);
+  }
+
   /**
    * Event button on click
+   * @fires toggle
+   */
+  signInBtn.addEventListener('click', () => {
+    DomFactory.getSigninForm().classList.toggle('hide');
+  });
+
+  /**
+   * Event button on click
+   * @fires toggle
+   */
+  logInBtn.addEventListener('click', () => {
+    DomFactory.getLoginForm().classList.toggle('hide');
+  });
+
+  /**
+   * Event button on click
+   * @fires logOut
+   */
+  logOutBtn.addEventListener('click', AuthFactory.logOut);
+
+  /**
+   * Event button on click
+   * @fires toggle
+   */
+  deleteBtn.addEventListener('click', () => {
+    DomFactory.getDeleteForm().classList.toggle('hide');
+  } );
+
+  /**
+   * Event button on click
+   * @fires toggle
+   */
+  transferBtn.addEventListener('click', () => {
+    DomFactory.getTransferForm().classList.toggle('hide');
+  });
+
+  /**
+   * Login event get the form data for login: user's dni and password. 
+   * 
+   * @fires login
+   */
+  DomFactory.getLoginForm().addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const dniNumber = data.get('dni-number-login');
+    const password = data.get('password-login');
+
+    AuthFactory.login(dniNumber, password); 
+  })
+
+  /**
+   * This event get the input's values in the signin's form.
+   * 
    * @fires addNewUser
-   */
-  signInBtn.addEventListener('click', UserFactory.addNewUser);
+  */
+  DomFactory.getSigninForm().addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const fullName = data.get('full-name');
+    const age = data.get('age');
+    const email = data.get('email');
+    const dniNumber = data.get('dni-number');
+    const password = data.get('password');
+    const rePassword = data.get('re-password')
+
+    UserFactory.addNewUser(fullName, age, email, dniNumber, password, rePassword);
+  })
 
   /**
-   * Event button on click
-   * @fires loginUser
-   */
-  logInBtn.addEventListener('click', loginUser);
+   * This event get the input's values in the Tranfer's form.
+   * 
+   * @fires transaction
+  */
+  DomFactory.getTransferForm().addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const dniToTransfer = data.get('dni-number-to-transfer');
+    const amountToTranfer = parseInt(data.get('amount-to-transfer'));
+
+    transaction(dniToTransfer,amountToTranfer);
+  })
 
   /**
-   * Event button on click
-   * @fires logoutUser
-   */
-  logOutBtn.addEventListener('click', logoutUser);
+   * This event get the input's values in the delete's form.
+   * 
+   * @fires deleteUser
+  */
+  DomFactory.getDeleteForm().addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    const dniNumberToDelete =  data.get('dni-number-to-delete');
 
-  /**
-   * Event button on click
-   * @fires deleteU
-   */
-  deleteBtn.addEventListener('click', deleteU );
+    UserFactory.deleteUser(dniNumberToDelete);
 
-  /**
-   * Event button on click
-   * @fires transactions 
-   */
-  transferBtn.addEventListener('click', transaction);
+  })
 })
 
 // Money formater
 const OPTION = {style : 'currency', currency: 'COP'}; 
 const MONEY_FORMAT = new Intl.NumberFormat('es-CO', OPTION); 
 
-/**
- * This function validates before call the delete function in UserFactory Class.
- * @function deleteUser
- * @function logOut
- * 
- * @listens deleteBtn
- */
-function deleteU(){
-
-  if(!UserFactory.currentUser){
-    return;
-  };
-
-  const userToFind = prompt('Ingrese el numero de cedula:');
-
-  if(!userToFind){
-    return;
-  }
-  
-  if(userToFind != UserFactory.currentUser.dni){
-    alert('No es posible elimintar una cuenta diferente a la tuya.');
-
-  } else{
-    UserFactory.deleteUser(userToFind);
-    AuthFactory.logOut();
-    console.log(UserFactory.users);
-  }
-
-}
 
 /**
- * This function validates before call the login function in AuthFactory Class
- * @function findOne
- * @function login
- * 
- * @listens logInBtn
- */
-function loginUser(){
-  const askDni = parseInt(prompt('Ingrese su dni:'));
-
-  if(!askDni){
-    return;
-  } 
-
-  if(!UserFactory.findOne(askDni)){
-    alert('El usuario indicado no existe.');
-  } else{
-    const askPassword = prompt('Ingrese su contraseña:');
-  
-    if(!askPassword){
-      return;
-    }
-  
-    AuthFactory.login(askDni, askPassword);
-  }
-
- }
-
- /**
- * This function validates before call the logout function in AuthFactory Class
- * @function logOut
- * 
- * @listens logOutBtn
- */
- function logoutUser(){
-
-  if(!UserFactory.currentUser){
-    alert('No ha iniciado sesion.');
-
-  } else{
-    AuthFactory.logOut();
-  
-  }
- }
-
- /**
  * This function validates before call the transfer function in Transaction Class
  * @function transfer
  * 
  * @listens transferBtn
- */
- function transaction(){
+*/
+ function transaction(dniToTransfer, amount){
 
-  if(!UserFactory.currentUser){
-    return;
-
-  };
-
-  const dniToTransfer = parseInt(prompt('Ingrese el DNI del usuario a transferir:'));
-
-  if(!dniToTransfer){
-    return;
-
-  } 
-  
-  if(dniToTransfer === UserFactory.currentUser.dni){
-    alert('No es posible realizar una transferencia a tu misma cuenta.');
-    
-  } else {
-    Transactions.transfer(dniToTransfer);
-  }
+    if(dniToTransfer == UserFactory.currentUser.dni){
+      alert('No es posible realizar una transferencia a tu misma cuenta.');
+      
+    } else {
+      Transactions.transfer(dniToTransfer, amount);
+    }
   
  }
 
