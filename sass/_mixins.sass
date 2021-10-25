@@ -1,0 +1,42 @@
+@import "./_variables"
+  
+@mixin titles
+  font-family: $title-font
+  color: $deep-blue
+  font-weight: 500
+
+@mixin subtitles
+  font-family: $title-font
+  color: $deep-blue
+  font-weight: 300
+  
+@mixin text
+  font-family: $text-font
+  color: $deep-blue
+
+@mixin btns
+  width: 10rem
+  box-shadow: $shadow
+  color: $deep-blue
+
+@mixin forms
+  box-shadow: $shadow
+
+/*  Mixin for Media Queries */
+@mixin responsive($breakpoint)
+
+  @if $breakpoint == mobile
+    @media only screen and (min-width: 320px) and (max-width: 767px)
+      @content
+
+  @if $breakpoint == tablet
+    @media only screen and (min-width: 768px) and (max-width: 1024px)
+      @content
+  
+  @if $breakpoint == largeTablet
+    @media only screen and (min-width: 1025px) and (max-width: 1199px)
+      @content
+  
+  @if $breakpoint == desktop
+    @media only screen and (min-width: 1200px)
+      @content

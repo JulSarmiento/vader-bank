@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles/style.css">
+  <title>SImulador Interactivo</title>
+</head>
+<body>
+  <header>
+    <h1>Simulador Interactivo</h1>
+  </header>
+  
+  <main class="excerise-container">
+    <section>
+      <h2>Simulador de banco</h2>
+      <p>Con el simulador podras realizar las siguientes operaciones:</p>
+      <ul>
+        <li>Ingresar nuevo usuario.</li>
+        <li>'Login'.</li>
+        <li>Eliminar cuenta, ver tu balance, realizar transferencias entre usuarios existentes y ver los movimientos realizados con la cuenta.</li>
+        <li>'Logout'.</li>
+      </ul>
+
+      <button id="signin">Nuevo Usuario.</button> 
+      <button id="login">Login</button> 
+
+      <section id="signin-form" class="hide">
+        <form action="">
+          <div>
+            <label for="full-name">Nombre Completo</label>
+            <input type="text" name="full-name" id="full-name">
+          </div>
+
+          <div>
+            <label for="age">Edad:</label>
+            <input type="number" name="age" id="age">
+          </div>
+
+          <div>
+            <div>
+              <label for="email">Correo Electronico</label>
+              <input type="email" name="email" id="email">
+            </div>
+          </div>
+
+          <div>
+            <label for="dni-number">Numero de Documento:</label>
+            <input type="number" name="dni-number" id="dni-number">
+          </div>
+
+          <div>
+            <label for="password">Contraseña:</label>
+            <input type="password" name="password" id="password">
+          </div>
+
+          <div>
+            <label for="re-password">Confirma Contraseña:</label>
+            <input type="password" name="re-password" id="re-password">
+          </div>
+
+          <button type="submit">Enviar</button>
+          <button type="reset">Limpiar</button>
+        </form>
+      </section>
+
+      <!-- login -->
+      <section id="login-form" class="hide">
+        <form action="">
+
+          <div>
+            <label for="dni-number-login">Numero de Documento:</label>
+            <input type="number" name="dni-number-login" id="dni-number-login">
+          </div>
+
+          <div>
+            <label for="password-login">Contraseña:</label>
+            <input type="password" name="password-login" id="password-login">
+          </div>
+
+          <button type="submit">Enviar</button>
+          <button type="reset">Limpiar</button>
+        </form>
+      </section>
+        
+    </section>
+
+    <section id="logged-panel" class="balance hide">
+      <h3 id="user-name"></h3>
+      <p>El balance de tu cuenta es:</p>
+      <p id="balance"></p>
+
+      <button id="transfer">Transferir</button>
+      <button id="logout">Cerrar Sesion</button>
+      <button id="delete">Eliminar Cuenta</button> 
+
+      <section id="transfer-form" class="hide">
+        <form action="">
+
+          <div>
+            <label for="dni-number-to-transfer">DNI del usuario a transferir:</label>
+            <input type="number" name="dni-number-to-transfer" id="dni-number-to-transfer">
+          </div>
+
+          <div>
+            <label for="amount-to-transfer">Monto a Transferir:</label>
+            <input type="number" name="amount-to-transfer" id="amount-to-transfer">
+          </div>
+
+          <button type="submit">Enviar</button>
+          <button type="reset">Limpiar</button>
+        </form>
+      </section>
+
+      <section id="delete-user-form" class="hide">
+        <form action="">
+
+          <div>
+            <label for="dni-number-to-delete">Confirme su DNI:</label>
+            <input type="password" name="dni-number-to-delete" id="dni-number-to-delete">
+          </div>
+
+          <button type="submit">Enviar</button>
+          <button type="reset">Limpiar</button>
+        </form>
+      </section>
+
+      <div>
+        <h4>Movimientos:</h4>
+        <ul id="transactions"></ul>
+      </div>
+
+      <div>
+        <h4>Usuarios Disponibles para transferencia:</h4>
+        <ul id="users-list"></ul>
+      </div>
+
+    </section>
+
+  </main>
+  <footer>By julie</footer>
+
+  <script src="./scripts/index.js"></script>
+  <script src="./scripts/users/user.js"></script>
+  <script src="./scripts/transactions/transactions.js"></script>
+</body>
+
+
+</html>

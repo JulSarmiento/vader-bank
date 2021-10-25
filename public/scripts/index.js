@@ -215,7 +215,6 @@ window.addEventListener('load', () => {
 const OPTION = {style : 'currency', currency: 'COP'}; 
 const MONEY_FORMAT = new Intl.NumberFormat('es-CO', OPTION); 
 
-
 /**
  * This function validates before call the transfer function in Transaction Class
  * @function transfer

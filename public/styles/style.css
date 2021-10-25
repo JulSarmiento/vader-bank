@@ -1,31 +1,66 @@
-:root {
-    margin: 1% 10%;
-    font-family: 'Roboto Condensed', sans-serif;
-}
+/*  Mixin for Media Queries */
+.text {
+  font-family: "Roboto Condensed", sans-serif;
+  color: #18188F;
+  font-size: 1.5rem; }
+  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .text {
+      font-size: 2rem; } }
+  @media only screen and (min-width: 1200px) {
+    .text {
+      font-size: 2.2rem; } }
 
-/*Excerise boxes*/
+.btn {
+  width: 10rem;
+  box-shadow: 2px 2px 15px 3px #18188f10;
+  color: #18188F; }
 
-.excerise-container{
-    padding: 10px 30px;
-}
+.input-detail {
+  box-shadow: 2px 2px 15px 3px #18188f10; }
 
-section {
-    box-shadow: 5px 5px 15px 5px rgba(4,129,189,0.24);
-    border: none;
-    padding: 20px;
-    margin: 20px 0;
-}
+/*  Mixin for Media Queries */
+.header {
+  border-top: 0.5rem solid #18188F;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 2px 2px 15px 3px #18188f10; }
+  .header .header__logo {
+    height: 2rem; }
 
-button {
-    background-color: rgba(202, 202, 235, 0.582);
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
+.footer {
+  border-bottom: 0.5rem solid #18188F;
+  box-shadow: 2px 2px 15px 3px #18188f10; }
 
-}
-/* general  */
+/*  Mixin for Media Queries */
+@media only screen and (min-width: 1200px) {
+  .main {
+    margin-top: 10rem; } }
 
-.hide{
-    display: none;
-}
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .main__loginPicture {
+    width: 40rem; } }
 
+@media only screen and (min-width: 1200px) {
+  .main__loginPicture {
+    width: 40rem; } }
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .main__loginForm {
+    width: 50rem; } }
+
+@media only screen and (min-width: 1200px) {
+  .information__pictureBox {
+    width: 60rem; } }
+
+html {
+  font-size: 62.5%; }
+  html body {
+    overflow-x: hidden;
+    background: var(--bs-gradient);
+    height: 100vh; }
+
+root {
+  margin: 0;
+  padding: 0;
+  margin: 1% 10%; }

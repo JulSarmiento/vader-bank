@@ -1,0 +1,30 @@
+@import "../_variables"
+@import "../_mixins"
+
+
+.main
+
+  @include responsive(desktop)
+    margin-top: 10rem
+
+  &__loginPicture
+
+    @include responsive(tablet)
+      width: 40rem
+
+    @include responsive(desktop)
+      width: 40rem
+
+
+
+  &__loginForm
+    
+    @include responsive(tablet)
+      width: 50rem
+
+.information
+
+  &__pictureBox
+
+    @include responsive(desktop)
+      width: 60rem
