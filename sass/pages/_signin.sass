@@ -1,0 +1,27 @@
+@import "../_variables"
+@import "../_mixins"
+
+
+.main
+
+  @include responsive(desktop)
+    margin-top: 10rem
+
+  &__signinPicture
+
+    width: 30rem
+    margin-top: 3rem
+
+    @include responsive(tablet)
+      width: 40rem
+
+    @include responsive(desktop)
+      width: 40rem
+
+
+
+  &__loginForm
+    
+    @include responsive(tablet)
+      width: 35rem
+

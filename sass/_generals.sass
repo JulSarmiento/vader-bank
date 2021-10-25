@@ -1,5 +1,5 @@
-@import "./_variables"
-@import "./_mixins"
+@import "./variables"
+@import "./mixins"
 
 // .picture-container
 //   width: 25rem
@@ -18,7 +18,12 @@
   @include responsive(desktop)
     font-size: 2.2rem
   
-
+.subtitle
+  font-family: $title-font
+  color: $deep-blue
+  font-weight: 300
+  font-size: 3rem
+  
 .btn 
   @include btns
 
