@@ -40,7 +40,17 @@
   @include responsive(tablet)
     width: 45rem  
 
+  @include responsive(largeTablet)
+    width: 45rem
+
+  @include responsive(desktop)
+    width: 45rem
+
 .user-image
+
+  @include responsive(largeTablet)
+    opacity: 0.2
+    
   @include responsive(desktop)
     opacity: 0.2
     width: 50rem
