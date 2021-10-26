@@ -1,0 +1,46 @@
+@import "../_variables"
+@import "../_mixins"
+
+
+.userPanel__profile
+  box-shadow: $shadow
+  border-radius: 0.5rem
+
+  @include responsive(largeTablet)
+
+  
+
+.main__balance
+
+  .balance__cardContainer
+    position: relative
+    text-align: center
+    color: white
+
+    .centered
+      position: absolute
+      top: 80%
+      left: 50%
+      transform: translate(-50%, -50%)
+
+    .centered-two
+      position: absolute
+      top: 85%
+      left: 50%
+      transform: translate(-50%, -50%)
+
+
+.userAvatar
+  width: 8rem
+
+.debit-card
+  box-shadow: $shadow
+  border-radius: 1rem
+
+  @include responsive(tablet)
+    width: 45rem  
+
+.user-image
+  @include responsive(desktop)
+    opacity: 0.2
+    width: 50rem

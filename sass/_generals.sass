@@ -17,12 +17,24 @@
 
   @include responsive(desktop)
     font-size: 2.2rem
+
+.text--mod
+  font-size: 1rem
+
+  @include responsive(tablet)
+    font-size: 1.5rem
+
+  @include responsive(largeTablet)
+    font-size: 1.7rem
+
+  @include responsive(desktop)
+    font-size: 1.7rem
   
 .subtitle
   font-family: $title-font
   color: $deep-blue
-  font-weight: 300
-  font-size: 3rem
+  font-weight: 600
+  font-size: 2.2rem
   
 .btn 
   @include btns

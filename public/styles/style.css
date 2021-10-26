@@ -3,18 +3,30 @@
   font-family: "Roboto Condensed", sans-serif;
   color: #18188F;
   font-size: 1.5rem; }
-  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  @media only screen and (min-width: 768px) and (max-width: 1023px) {
     .text {
       font-size: 2rem; } }
   @media only screen and (min-width: 1200px) {
     .text {
       font-size: 2.2rem; } }
 
+.text--mod {
+  font-size: 1rem; }
+  @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .text--mod {
+      font-size: 1.5rem; } }
+  @media only screen and (min-width: 1024px) and (max-width: 1199px) {
+    .text--mod {
+      font-size: 1.7rem; } }
+  @media only screen and (min-width: 1200px) {
+    .text--mod {
+      font-size: 1.7rem; } }
+
 .subtitle {
   font-family: "Karla", sans-serif;
   color: #18188F;
-  font-weight: 300;
-  font-size: 3rem; }
+  font-weight: 600;
+  font-size: 2.2rem; }
 
 .btn {
   width: 10rem;
@@ -43,7 +55,7 @@
   .main {
     margin-top: 10rem; } }
 
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
   .main__loginPicture {
     width: 40rem; } }
 
@@ -51,7 +63,7 @@
   .main__loginPicture {
     width: 40rem; } }
 
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
   .main__loginForm {
     width: 50rem; } }
 
@@ -67,16 +79,51 @@
 .main__signinPicture {
   width: 30rem;
   margin-top: 3rem; }
-  @media only screen and (min-width: 768px) and (max-width: 1024px) {
+  @media only screen and (min-width: 768px) and (max-width: 1023px) {
     .main__signinPicture {
       width: 40rem; } }
   @media only screen and (min-width: 1200px) {
     .main__signinPicture {
       width: 40rem; } }
 
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
-  .main__loginForm {
-    width: 35rem; } }
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .main__signinForm {
+    width: 40rem; } }
+
+/*  Mixin for Media Queries */
+.userPanel__profile {
+  box-shadow: 2px 2px 15px 3px #18188f10;
+  border-radius: 0.5rem; }
+
+.main__balance .balance__cardContainer {
+  position: relative;
+  text-align: center;
+  color: white; }
+  .main__balance .balance__cardContainer .centered {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+  .main__balance .balance__cardContainer .centered-two {
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+
+.userAvatar {
+  width: 8rem; }
+
+.debit-card {
+  box-shadow: 2px 2px 15px 3px #18188f10;
+  border-radius: 1rem; }
+  @media only screen and (min-width: 768px) and (max-width: 1023px) {
+    .debit-card {
+      width: 45rem; } }
+
+@media only screen and (min-width: 1200px) {
+  .user-image {
+    opacity: 0.2;
+    width: 50rem; } }
 
 html {
   font-size: 62.5%; }

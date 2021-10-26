@@ -20,11 +20,15 @@
   <!-- style sheet -->
   <link rel="stylesheet" href="./styles/style.css">
 
-  <title>VADER BANK</title>
+  <title>VADER BANK | USER</title>
 </head>
 <body>
 
-  <header class="header container-fluid m-0 px-5 bg-white">
+  <!-- 
+    HEADER
+    containes
+   -->
+  <header class="header container-fluid m-0 mb-5 px-5 bg-white">
 
     <nav class="navbar navbar-expand-lg navbar-light ">
 
@@ -36,11 +40,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
             <li class="nav-item">
-              <a class="nav-link active text" aria-current="page" href="./index.html">Home</a>
+              <a class="nav-link active disabled text " aria-current="page" href="./signin.html">Usuario</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text" href="./signin.html">Nuevo Usuario</a>
+              <a class="nav-link text "  href="./transfer.html">Transferencias</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link text " href="./reception.html">Recibir Dinero</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text " href="./credits.html">Creditos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text " href="./index.html">Cerrar Sesion</a>
+            </li>
+            
           </ul>
         </div>
       </div>
@@ -51,53 +65,112 @@
     MAIN SECTION
     whit the login form and the principal logo
    -->
-  <main class="container px-5 mx-auto d-xl-flex flex-sm-column flex-md-column flex-lg-row main">
+  <main class="container px-5 mx-auto mx-5 d-xl-flex justify-content-center d-flex flex-column flex-xl-row main ">
 
-    <div class="col-sm-12  col-lg-8  mx-auto d-flex justify-content-center flex-column mb-5 main__loginPicture">
-      <img src="./assets/imgs/logo-page.png" alt="Logo principal de Vader Bank" loading="lazy">
+    <div class="col-sm-12 col-lg-6 mt-lg-5 d-flex justify-content-center flex-column mx-auto main__usersPanel">
+
+      <div class="col-12 d-flex align-items-center gap-5 p-3 userPanel__profile">
+        <img src="assets/imgs/avatar.png" class=" userAvatar" alt=" Foto del usuario logeado">
+        <div>
+          <h2 class="text-center text">Hola, {nombre del usuario}!</h2>
+          <h3 class="text-center text"><small>Ultimo logeo: {fecha}</small></h3>
+        </div>
+        
+      </div>
+
+      <section class=" main__balance">
+        <h2  class="my-5 subtitle">Balance</h2>
+
+  
+        <div class=" balance__cardContainer">
+          <a href=""><img src="./assets/imgs/debit-card.png" class="img-fluid debit-card" alt="Imagen de una tarjeta de debito"></a>
+          <p class="text-warning text text--mod centered">{Numero de cuenta}</p>
+          <p class="text-warning text text--mod centered-two">{Balance}</p>
+        </div>
+  
+        <!-- 
+          TRANSACTION'S SECTION
+          This section have the movements record
+         -->
+        <section class="   hide">
+          <h3 class="mt-5 subtitle">Movimientos</h3>
+  
+          <table class="table text">
+            <tbody>
+              <tr class="text">
+                <th> Usuario</th>
+                <th> Tipo</th>
+                <th> Monto</th>
+                <th> Fecha</th>
+              </tr>
+  
+              <tr class="text">
+                <td>Habid Manzur</td>
+                <td>Recepcion</td>
+                <td>$150.000</td>
+                <td>9/10/2021</td>
+              </tr>
+              
+              <tr class="text">
+                <td>Daniel Quintero</td>
+                <td>Envio</td>
+                <td>$150.000</td>
+                <td>9/10/2021</td>
+              </tr>
+              
+              <tr class="text">
+                <td>Ana Milena</td>
+                <td>Envio</td>
+                <td>$150.000</td>
+                <td>9/10/2021</td>
+              </tr>
+    
+            </tbody>
+    
+          </table>
+        </section>
+  
+      </section>
+  
+      <section class="main__balance">
+        <h2  class="my-5 subtitle">Credito</h2>
+  
+        <div class=" balance__cardContainer">
+          <a href=""><img src="./assets/imgs/credit-card.png" class="img-fluid debit-card" alt="Imagen de una tarjeta de debito"></a>
+        </div>
+  
+        <!-- 
+          PAYMENTS'S SECTION
+          This section have the payment form
+         -->
+        <section class="   hide">
+          <h3 class="mt-5 subtitle">Formulario de Pagos</h3>
+  
+          
+        </section>
+  
+      </section>
+
+    </div>
+
+
+
+    
+
+    <div class="col-sm-12  col-lg-6  mx-auto d-flex align-items-lg-end justify-content-center flex-column mb-5 main__signinPicture">
+      <img src="./assets/imgs/user-page.png" class="user-image" alt="Logo principal de Vader Bank" loading="lazy">
       <div class="information__textBox">
         <h1 class="text-center mt-0 text"> <small>Vader Bank, el neobanco para las personas que aman dominar el sistema.</small></h1>
       </div>
     </div>
 
-    <form class="col-sm-12 col-lg-4 mt-lg-5 d-flex justify-content-center flex-column mx-auto main__loginForm login-form">
-      <div class="mb-3">
-        <label for="dni-number-login" class="form-label text">Numero de identificacion</label>
-        <input type="number" class="form-control text input-detail" id="dni-number-login"  title="Ingresa el correo con el cual te registraste" required>
-      </div>
-      <div class="mb-3">
-        <label for="password-login" class="form-label text">Contraseña</label>
-        <input type="password" class="form-control text input-detail" id="password-login" minlength="10" title="Ingresa la contraseña con la cual te registraste"  required>
-      </div>
-
-      <div class="d-flex justify-content-center mt-5 gap-5">
-        <button type="submit" class="btn btn-warning text">Enviar</button>
-        <button type="reset" class="btn btn-warning text">Limpiar</button>
-      </div>
-
-    </form>
-
   </main>
-
-  <!-- 
-    PICTURE SECTION
-    This section contain a picture related to the information.
-   -->
-
-  <section class="container mx-auto px-5 my-5 information">
-
-    <div class="p-5 mx-auto information__pictureBox">
-      <img class="img-fluid" src="./assets/imgs/login-home.png" alt="Imagen que hace referencia a la vision de exito que promueve el banco." loading="lazy">
-    </div>
-
-  </section>
-
 
   <!-- 
     FOOTER
     This is the footer section with infomation
    -->
-  <footer class="container-fluid footer">
+  <footer class="container-fluid mt-5 footer">
 
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
 
@@ -114,7 +187,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title text" id="exampleModalLabel">Contactanos!</h5>
-                <button type="button" class="btn-close text" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <form>
@@ -124,7 +197,7 @@
                   </div>
                   <div class="mb-3">
                     <label for="message-text" class="col-form-label text">Dejanos tu mensaje:</label>
-                    <textarea class="form-control text" id="message-text"></textarea>
+                    <textarea class="form-control" id="message-text"></textarea>
                   </div>
                 </form>
               </div>
