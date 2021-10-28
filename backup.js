@@ -1,7 +1,7 @@
 /**
  * This is the user class
  */
-class User{
+ class User{
   /**
    * 
    * @param {string} name 
@@ -33,40 +33,22 @@ class UserFactory{
   /**
    * Set the users array. Contains some users for testing.
    */
-  static users = [];
+  static users = [
+    // new User ('Julieth Sarmiento', 28, 1140862112, 'jasa1999@hotmail.com', '885388' ),
+    // new User ('Habib Manzur', 30, 1140845884, 'habibmanazur@hotmail.com', 'geminis06'),
+    // new User ('Bebe Vader', 18, 927, 'vader@hotmail.com', 'minimichi'),
+    // new User ('Maria Martinez', 45, 1234567891, 'mariaMartinez@hotmail.com','1234'),
+    // new User ('Eduardo Vergara', 35, 2345678912, 'eduardoVergara@hotmail.com','1234'),
+    // new User ('Ana Mileta Mejia', 33, 3456789123, 'anamilenamejia@hotmail.com','1234'),
+    // new User ('Edelmira Ahumada', 27, 4567891234, 'edelAhumada@hotmail.com','1234'),
+    // new User ('Daniel Quintero', 24, 5678912345, 'danielquintero@hotmail.com','1234'),
+    // new User ('Oscar Muñoz', 27, 6789123456, 'oscarmuñoz@hotmail.com','1234')
+  ];
 
   /**
    * The variable that contains the "logged" user.
    */
   static currentUser;
-
-
-  /**
-   * This function load the localstorage
-   */
-  static init(){
-
-    const dataStored = localStorage.getItem('Users');
-    const dataCurrentUser = localStorage.getItem('Current-User');
-  
-    if(dataStored){
-      UserFactory.users = JSON.parse(dataStored);
-      UserFactory.users.forEach((user) =>{
-        console.log(user)
-      })
-    }
-  
-    if(dataCurrentUser){
-      UserFactory.currentUser = JSON.parse(dataCurrentUser);
-    }
-  }
-
-  /**
-   * This fuction save the localstorage (specialy for uptades in the localstorage's array)
-   */
-  static save(users){
-    localStorage.setItem('Users', JSON.stringify(users));
-  }
 
   /**
    * This function find de user by its DNI number
@@ -78,8 +60,6 @@ class UserFactory{
     return UserFactory.users.find(user => dni == user.dni);
   }
   
-
-
   /**
    * This function adds a new user
    * @returns {object} returns the created user.
@@ -88,7 +68,7 @@ class UserFactory{
    * @listens signInBtn
    */
   static addNewUser(fullname, age, email, dniNumber, password, rePassword) {
-    debugger;
+    
     if(UserFactory.findOne(dniNumber) ){
       alert('El usuario ya existe.');
       return;
@@ -104,12 +84,12 @@ class UserFactory{
       } else{ 
         const user = new User(fullname, age, dniNumber, email, password, User.balance, User.movements);
         UserFactory.users.push(user);
-        UserFactory.save(UserFactory.users);
         alert(`Bienvenido/a ${fullname}, esperamos que su experiencia en nuestro banco sea digna de sus expectativas.`);
-        window.location.href="./index.html";  
+
+        DomFactory.getSigninForm().classList.toggle('hide');
+        localStorage.setItem('Users', JSON.stringify(UserFactory.users));
         return user;
       }
-
 
     }
 
@@ -165,10 +145,10 @@ class UserFactory{
       }
     }
  
+
   }
 
 }
-
 
 /**
  * This class mangane all the auth process for the users like login and logout.
@@ -190,17 +170,24 @@ class AuthFactory{
 
       localStorage.setItem('Current-User', UserFactory.currentUser.dni);
 
-      localStorage.setItem('Users', JSON.stringify(UserFactory.users));
-      
-      // UserFactory.currentUser.movements.forEach(movement => {
-      //   const li = document.createElement('li');
-      //   const content = movement;
-      //   const text = document.createTextNode(content);
-      //   li.appendChild(text);
-      //   DomFactory.getTransactions().appendChild(li);
-      // });
+      DomFactory.getUsername().innerHTML = `Bienvenido ${validator.name}`;
 
-      window.location.href="./user.html";  
+      DomFactory.getBalance().innerHTML = `${MONEY_FORMAT.format(validator.balance)}`;
+
+      UserFactory.orderUserByName();
+
+      DomFactory.getTransactions().innerHTML = '';
+
+      localStorage.setItem('Users', JSON.stringify(UserFactory.users));
+      UserFactory.currentUser.movements.forEach(movement => {
+        const li = document.createElement('li');
+        const content = movement;
+        const text = document.createTextNode(content);
+        li.appendChild(text);
+        DomFactory.getTransactions().appendChild(li);
+      });
+
+      DomFactory.getLoggedPanel().classList.toggle('hide');
 
     } else{
       alert('Contraseña erroneo, por favor, vuelva a ientar');
@@ -212,9 +199,8 @@ class AuthFactory{
    */
   static logOut(){
     UserFactory.currentUser = null;
-    localStorage.removeItem(Current-User)
-    window.location.href="./index.html";
-
+    DomFactory.getLoggedPanel().classList.toggle('hide');
+    DomFactory.getUsersList().innerHTML= '';
   }
 
 }

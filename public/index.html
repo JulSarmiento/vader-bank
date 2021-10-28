@@ -60,14 +60,17 @@
       </div>
     </div>
 
-    <form class="col-sm-12 col-lg-4 mt-lg-5 d-flex justify-content-center flex-column mx-auto main__loginForm login-form">
+    <!-- 
+      LOGIN FORM
+     -->
+    <form id="login-form" class="col-sm-12 col-lg-4 mt-lg-5 d-flex justify-content-center flex-column mx-auto main__loginForm login-form">
       <div class="mb-3">
         <label for="dni-number-login" class="form-label text">Numero de identificacion</label>
-        <input type="number" class="form-control text input-detail" id="dni-number-login"  title="Ingresa el correo con el cual te registraste" required>
+        <input type="number" class="form-control text input-detail" name="dni-number-login" id="dni-number-login" minlength="10"  title="Ingresa el correo con el cual te registraste" required>
       </div>
       <div class="mb-3">
         <label for="password-login" class="form-label text">Contraseña</label>
-        <input type="password" class="form-control text input-detail" id="password-login" minlength="10" title="Ingresa la contraseña con la cual te registraste"  required>
+        <input type="password" class="form-control text input-detail" name="password-login" id="password-login"  title="Ingresa la contraseña con la cual te registraste"  required>
       </div>
 
       <div class="d-flex justify-content-center mt-5 gap-5">
@@ -147,8 +150,8 @@
 
   <!-- scripts -->
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/pages/home.js"></script>
   <script src="./scripts/users/user.js"></script>
-  <script src="./scripts/transactions/transactions.js"></script>
 
   <!-- bootstrap's script -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

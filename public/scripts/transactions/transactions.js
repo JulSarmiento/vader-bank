@@ -1,3 +1,5 @@
+let validator;
+
 /**
  * This class manage all the transactions avaible for the users acounts.
  */
@@ -10,7 +12,7 @@ class Transactions{
    * @function findOne
    */
   static transfer(dniToTransfer, amount){
-    debugger
+
     const toTransferUser = UserFactory.findOne(dniToTransfer);
 
     if(toTransferUser === undefined){
@@ -18,33 +20,71 @@ class Transactions{
 
     } else{ 
       
-      if(amount > UserFactory.currentUser.balance){
+      if(amount > validator.balance){
         alert('No posee los fondos para realizar la transferencia.');
 
       } else {
         alert(`La transferencia fue exitosa.`);
-        DomFactory.getTransactions().innerHTML = '';
 
-        let newBalanceUserTransfering = UserFactory.currentUser.balance -= amount;
+        let newBalanceUserTransfering = validator.balance -= amount;
         toTransferUser.balance += amount;
 
-        UserFactory.currentUser.movements.push(`Transferencia realizada a ${toTransferUser.name} por ${MONEY_FORMAT.format(amount)}.`);
-        toTransferUser.movements.push(`Transferencia recibida por ${UserFactory.currentUser.name} por ${MONEY_FORMAT.format(amount)}.`);
-
-        DomFactory.getTransactions().innerHTML = '';
-        localStorage.setItem('Users', JSON.stringify(UserFactory.users));
-        UserFactory.currentUser.movements.forEach(movement => {
-          const li = document.createElement('li');
-          const content = movement;
-          const text = document.createTextNode(content);
-          li.appendChild(text);
-          DomFactory.getTransactions().appendChild(li);
-        });
+        validator.movements.push({name: toTransferUser.name, type: 'Envio', amount: amount});
         
-        DomFactory.getBalance().innerHTML = MONEY_FORMAT.format(newBalanceUserTransfering);
+        toTransferUser.movements.push({name: validator.name, type: 'Recepcion' , amount: amount});
+ 
+
+        localStorage.setItem('Users', JSON.stringify(UserFactory.users));
+        document.getElementById('balance-for-transfer').innerHTML = formatPrice(newBalanceUserTransfering);
 
       }       
     }
 
   }
 }
+
+window.addEventListener('load', () => {
+
+  UserFactory.init();
+
+  validator = UserFactory.users.find(user => UserFactory.currentUser == user.dni);
+
+  document.getElementById('balance-for-transfer').innerHTML = formatPrice(validator.balance);
+
+  /**
+   * This event get the input's values in the Tranfer's form.
+   * 
+   * @fires transaction
+  */
+     document.getElementById('transfer-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(event.target);
+      const dniToTransfer = data.get('dni-number-to-transfer');
+      const amountToTranfer = parseInt(data.get('amount-to-transfer'));
+  
+      transaction(dniToTransfer,amountToTranfer);
+    })
+
+})
+
+/**
+ * This function validates before call the transfer function in Transaction Class
+ * @function transfer
+ * 
+ * @listens transferBtn
+*/
+function transaction(dniToTransfer, amount){
+
+  if(dniToTransfer == UserFactory.currentUser.dni){
+    alert('No es posible realizar una transferencia a tu misma cuenta.');
+    
+  } else {
+    Transactions.transfer(dniToTransfer, amount);
+  }
+
+}
+
+
+
+
+
