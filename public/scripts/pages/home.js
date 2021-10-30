@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
    * 
    * @fires login
    */
-  DomFactory.getLoginForm().addEventListener('submit', (event) => {
+   document.getElementById('login-form').addEventListener('submit', (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     const dniNumber = data.get('dni-number-login');

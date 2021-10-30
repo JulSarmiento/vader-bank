@@ -13,7 +13,7 @@ window.addEventListener('load', () => {
    * 
    * @fires addNewUser
   */
-  DomFactory.getSigninForm().addEventListener('submit', (event) => {
+   document.getElementById('signin-form').addEventListener('submit', (event) => {
     debugger
     event.preventDefault();
     const data = new FormData(event.target);

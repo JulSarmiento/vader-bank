@@ -9,17 +9,17 @@ window.addEventListener('load', () => {
   
   let validator = UserFactory.users.find(user => UserFactory.currentUser == user.dni);
 
-  DomFactory.getUsername().innerHTML = `Bienvenido/a ${validator.name}!`;
+  document.getElementById('user-name').innerHTML = `Bienvenido/a ${validator.name}!`;
 
-  DomFactory.getBalance().innerHTML = formatPrice(validator.balance);
+  document.getElementById('balance').innerHTML = formatPrice(validator.balance);
 
   //UserFactory.orderUserByName();
 
-  DomFactory.getTransactions().innerHTML = '';
+  document.querySelector('#transactions tbody').innerHTML = '';
   
   validator.movements.forEach((movement) => {
     console.log('movement', movement)
-    DomFactory.getTransactions().insertAdjacentHTML( 'beforeEnd', `    
+    document.querySelector('#transactions tbody').insertAdjacentHTML( 'beforeEnd', `    
       <tr class="text">
       <td>${movement.name}</td>
       <td>${movement.type}</td>
