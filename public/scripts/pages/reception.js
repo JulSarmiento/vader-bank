@@ -1,8 +1,13 @@
 let validator;
 
 
-function reception(amout){
-
+function reception(description, amount){
+  setTimeout(() => {
+    validator.balance += amount;
+    validator.movements.push({name: description, type: 'Recepcion', amount: amount});
+    localStorage.setItem('Users', JSON.stringify(UserFactory.users));
+    alert (`Recepcion exitosa por ${formatPrice(amount)}, su nuevo saldo es de: ${formatPrice(validator.balance)}`);
+  }, 5000);
 
 }
 
@@ -18,19 +23,13 @@ window.addEventListener('load', () => {
     const description = data.get('description');
     const amountRecept = parseInt(data.get('amount-to-recep'));
 
-    reception(amountRecept);
-
     setTimeout(() =>{
       document.querySelector('.qr-picture').classList.toggle('hide');
     }, 1000);
 
+    reception(description, amountRecept);
 
-    setTimeout(() => {
-      validator.balance += amountRecept;
-      validator.movements.push({name: description, type: 'Recepcion', amount: amountRecept});
-      localStorage.setItem('Users', JSON.stringify(UserFactory.users));
-      alert (`Recepcion exitosa por ${formatPrice(amountRecept)}, su nuevo saldo es de: ${formatPrice(validator.balance)}`);
-    }, 5000);
+
 
 
     
