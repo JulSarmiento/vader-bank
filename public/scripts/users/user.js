@@ -11,6 +11,8 @@ class User{
    * @param {string} password 
    * @param {number} balance
    * @param {array} movements 
+   * @param {number} credit
+   * @param {number} creditDues
    */
   constructor(name, age, dni , email, password){
     this.id;
@@ -21,6 +23,8 @@ class User{
     this.password = password;
     this.balance = Math.round(Math.random()*1000000);
     this.movements = [];
+    this.credit = 0
+    this.creditDues = 0
 
   }
 }
