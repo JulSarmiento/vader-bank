@@ -38,10 +38,13 @@ function printResume(amount,dues, tax, totalDues){
  * @param {number} totalDues 
  */
 function addCreditToUser(amount, totalDues){
-  validator.credit = amount;
-  validator.creditDues = totalDues;
+  validator.credit += amount;
+  validator.creditDues += totalDues;
 
-  UserFactory.save();
+  UserFactory.save(UserFactory.users);
+  alert('Su Credito ha sido aprobado y el dinero ya se encuentra en su cuenta de credito.')
+  window.location.href = './user.html'
+
 }
 
 
@@ -128,7 +131,6 @@ window.addEventListener('load', () => {
     })
     
   })
-
 
 
 });

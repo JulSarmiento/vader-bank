@@ -15,16 +15,15 @@ class User{
    * @param {number} creditDues
    */
   constructor(name, age, dni , email, password){
-    this.id;
     this.name = name;
     this.age = parseInt(age);
     this.dni = parseInt(dni);
     this.email = email;
     this.password = password;
-    this.balance = Math.round(Math.random()*1000000);
+    this.balance = Math.round(Math.random()*9000000);
     this.movements = [];
-    this.credit = 0
-    this.creditDues = 0
+    this.credit;
+    this.creditDues;
 
   }
 }
@@ -70,7 +69,8 @@ class UserFactory{
    */
   static save(users){
     localStorage.setItem('Users', JSON.stringify(users));
-  }
+  };
+
 
   /**
    * This function find de user by its DNI number
@@ -92,7 +92,7 @@ class UserFactory{
    * @listens signInBtn
    */
   static addNewUser(fullname, age, email, dniNumber, password, rePassword) {
-    debugger;
+
     if(UserFactory.findOne(dniNumber) ){
       alert('El usuario ya existe.');
       return;

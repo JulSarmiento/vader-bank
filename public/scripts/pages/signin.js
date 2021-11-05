@@ -14,7 +14,7 @@ window.addEventListener('load', () => {
    * @fires addNewUser
   */
    document.getElementById('signin-form').addEventListener('submit', (event) => {
-    debugger
+
     event.preventDefault();
     const data = new FormData(event.target);
     const fullName = data.get('full-name');
