@@ -3,8 +3,10 @@ let validator;
 
 function reception(description, amount){
   setTimeout(() => {
+
+    const date = new Intl.DateTimeFormat('en-US').format(new Date())
     validator.balance += amount;
-    validator.movements.push({name: description, type: 'Recepcion', amount: amount});
+    validator.movements.push({name: description, type: 'Recepcion', amount, date });
     localStorage.setItem('Users', JSON.stringify(UserFactory.users));
     alert (`Recepcion exitosa por ${formatPrice(amount)}, su nuevo saldo es de: ${formatPrice(validator.balance)}`);
   }, 5000);

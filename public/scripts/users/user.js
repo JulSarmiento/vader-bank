@@ -71,7 +71,6 @@ class UserFactory{
     localStorage.setItem('Users', JSON.stringify(users));
   };
 
-
   /**
    * This function find de user by its DNI number
    * @param {number} dni 

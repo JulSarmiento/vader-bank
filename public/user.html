@@ -73,7 +73,7 @@
           <img src="assets/imgs/avatar.png" class=" userAvatar" alt=" Foto del usuario logeado">
           <div>
             <h2 class="text-center text" id="user-name"></h2>
-            <h3 class="text-center text" ><small>Ultimo logeo: {fecha}</small></h3>
+            <h3 class="text-center text" id="user-date" ><small>Ultimo logeo: {fecha}</small></h3>
           </div>
           
         </div>
@@ -84,7 +84,7 @@
     
           <div class=" balance__cardContainer">
             <a href="" id="show-movements"><img src="./assets/imgs/debit-card.png" class="img-fluid debit-card" alt="Imagen de una tarjeta de debito"></a>
-            <p class="text-warning text text--mod centered-two" id="balance">{Balance}</p>
+            <p class="text-warning text text--mod centered" id="balance">{Balance}</p>
           </div>
     
           <!-- 
@@ -118,6 +118,7 @@
     
           <div class=" balance__cardContainer">
             <a id="credit-show-panel"><img src="./assets/imgs/credit-card.png" class="img-fluid debit-card" alt="Imagen de una tarjeta de debito"></a>
+            <p class="text-warning text text--mod centered-two" id="credit-balance"></p>
           </div>
               
           <section id="payment-form-container" class="hide">

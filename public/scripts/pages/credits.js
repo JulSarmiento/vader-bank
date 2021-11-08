@@ -29,6 +29,7 @@ function printResume(amount,dues, tax, totalDues){
     </div>
   ` ) 
 
+
 }
 
 
@@ -38,12 +39,23 @@ function printResume(amount,dues, tax, totalDues){
  * @param {number} totalDues 
  */
 function addCreditToUser(amount, totalDues){
-  validator.credit += amount;
-  validator.creditDues += totalDues;
+  if(validator.credit){
+    alert('Actualmente ya cuenta con un credito de nuestro banco, para poder adquirir otro, debe cancelar el anterior.');
 
-  UserFactory.save(UserFactory.users);
-  alert('Su Credito ha sido aprobado y el dinero ya se encuentra en su cuenta de credito.')
-  window.location.href = './user.html'
+  } else {
+    validator.credit = amount;
+    validator.creditDues = totalDues;
+
+    const date = new Intl.DateTimeFormat('en-US').format(new Date())
+  
+    validator.movements.push({name: 'Credito', type: 'Recepcion', amount, date });
+    UserFactory.save(UserFactory.users);
+  
+    alert('Su Credito ha sido aprobado y el dinero ya se encuentra en su cuenta de credito.');
+    window.location.href = './user.html';
+  }
+
+
 
 }
 
@@ -63,6 +75,10 @@ window.addEventListener('load', () => {
     const data = new FormData(event.target);
     const creditAmount = parseInt(data.get('credit-amount'));
     const creditDues = parseInt(data.get('credit-dues'));
+
+    if(creditAmount < 1000000){
+      alert(`El monto minimo para los creditos es de ${formatPrice(1000000)}`);
+    };
   
     if(creditAmount <= 24000000){
   
@@ -115,6 +131,7 @@ window.addEventListener('load', () => {
     }
   
     let totalCreditDues = ((creditAmount / creditDues) * dues) + (creditAmount / creditDues);
+
   
   
     /**
@@ -137,6 +154,6 @@ window.addEventListener('load', () => {
 
 
 
-// PREGUNTARLE A HABI PORQUE ME REPITE 3 VECES EL RESUMEN Y LE DOY COTIZAR DOS VECES 
+
 
 

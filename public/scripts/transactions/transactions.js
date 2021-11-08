@@ -1,5 +1,6 @@
 let validator;
 
+
 /**
  * This class manage all the transactions avaible for the users acounts.
  */
@@ -29,9 +30,12 @@ class Transactions{
         let newBalanceUserTransfering = validator.balance -= amount;
         toTransferUser.balance += amount;
 
-        validator.movements.push({name: toTransferUser.name, type: 'Envio', amount: amount});
+        const date = new Intl.DateTimeFormat('en-US').format(new Date());
         
-        toTransferUser.movements.push({name: validator.name, type: 'Recepcion' , amount: amount});
+
+        validator.movements.push({name: toTransferUser.name, type: 'Envio', amount, date});
+        
+        toTransferUser.movements.push({name: validator.name, type: 'Recepcion', amount, date});
  
 
         localStorage.setItem('Users', JSON.stringify(UserFactory.users));

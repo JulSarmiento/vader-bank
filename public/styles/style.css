@@ -134,13 +134,13 @@
   color: white; }
   .main__balance .balance__cardContainer .centered {
     position: absolute;
-    top: 80%;
+    top: 86%;
     left: 50%;
     transform: translate(-50%, -50%); }
   .main__balance .balance__cardContainer .centered-two {
     position: absolute;
-    top: 85%;
-    left: 50%;
+    top: 65%;
+    left: 87%;
     transform: translate(-50%, -50%); }
 
 .userAvatar {
