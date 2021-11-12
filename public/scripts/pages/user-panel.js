@@ -6,6 +6,7 @@ window.addEventListener('load', () => {
   const movementsTable = document.getElementById('movements-table');
   const showCreditPaymentForm = document.getElementById('payment-form-container');
     
+
   UserFactory.init();
   
   let validator = UserFactory.users.find(user => UserFactory.currentUser == user.dni);

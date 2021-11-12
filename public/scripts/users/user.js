@@ -153,7 +153,7 @@ class AuthFactory{
       window.location.href="./user.html";  
 
     } else{
-      document.querySelector('#login-reject-resume').innerHTML = 'usuario o Contraseña erroneo, por favor vuelva a intentar.';
+      document.querySelector('#login-reject-resume').innerHTML = 'Usuario o contraseña erroneo, por favor vuelva a intentar.';
 
       document.querySelector('.login-reject-modal').click();
 

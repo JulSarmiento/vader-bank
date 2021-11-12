@@ -3,6 +3,8 @@
  * This envent
  */
 window.addEventListener('load', () => {
+
+
   localStorage.removeItem('Current-User');
   UserFactory.init();
   /**
