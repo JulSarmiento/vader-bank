@@ -27,7 +27,7 @@ function printResume(amount,dues, tax, totalDues){
       <button id="request-credit" class="btn btn-warning text">Solicitar</button>
       <button id="cancel-credit" class="btn btn-warning text" >Cancelar</button>
     </div>
-  ` ) 
+  ` ); 
 
 
 }
@@ -40,7 +40,14 @@ function printResume(amount,dues, tax, totalDues){
  */
 function addCreditToUser(amount, totalDues){
   if(validator.credit){
-    alert('Actualmente ya cuenta con un credito de nuestro banco, para poder adquirir otro, debe cancelar el anterior.');
+
+    document.querySelector('#credit-reject-resume').innerHTML = `Actualmente ya cuenta con un credito de nuestro banco por un monto de ${formatPrice(validator.credit)}, para poder adquirir otro, debe cancelar el anterior.`;
+    document.querySelector('.credit-reject-modal').click();
+
+    document.querySelector('.credit-reject-modal-btn').addEventListener('click', () => {
+      window.location.href = './user.html';
+    }) 
+
 
   } else {
     validator.credit = amount;
@@ -50,12 +57,15 @@ function addCreditToUser(amount, totalDues){
   
     validator.movements.push({name: 'Credito', type: 'Recepcion', amount, date });
     UserFactory.save(UserFactory.users);
-  
-    alert('Su Credito ha sido aprobado y el dinero ya se encuentra en su cuenta de credito.');
-    window.location.href = './user.html';
+
+    document.querySelector('#credit-resume').innerHTML = `Su Credito ha sido aprobado por un valor de: ${formatPrice(amount)}, el dinero ha sido depositado en su cuenta de credito.`;
+    document.querySelector('.credit-modal').click();
+
+    document.querySelector('.credit-modal-btn').addEventListener('click', () => {
+      window.location.href = './user.html';
+    })    
+    
   }
-
-
 
 }
 
@@ -77,7 +87,10 @@ window.addEventListener('load', () => {
     const creditDues = parseInt(data.get('credit-dues'));
 
     if(creditAmount < 1000000){
-      alert(`El monto minimo para los creditos es de ${formatPrice(1000000)}`);
+
+      document.querySelector('#credit-reject-resume').innerHTML = `El monto minimo para los creditos es de ${formatPrice(1000000)}`;
+      document.querySelector('.credit-reject-modal').click();
+      return
     };
   
     if(creditAmount <= 24000000){
@@ -131,8 +144,7 @@ window.addEventListener('load', () => {
     }
   
     let totalCreditDues = ((creditAmount / creditDues) * dues) + (creditAmount / creditDues);
-
-  
+ 
   
     /**
      * This event allows to call the function to print the credit info
@@ -148,7 +160,6 @@ window.addEventListener('load', () => {
     })
     
   })
-
 
 });
 

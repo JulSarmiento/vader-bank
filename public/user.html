@@ -91,24 +91,27 @@
             TRANSACTION'S SECTION
             This section have the movements record
           -->
-          <section id="movements-table" class=" hide">
+          <section id="movements-table" class=" hide ">
             <h3 class="mt-5 subtitle">Movimientos</h3>
     
-            <table id="transactions" class="table text">
-              <thead>
-                <tr class="text">
-                  <th> Usuario</th>
-                  <th> Tipo</th>
-                  <th> Monto</th>
-                  <th> Fecha</th>
-                </tr>
-              </thead>
+            <div class="table-mod">
+              <table id="transactions" class="table text">
+                <thead>
+                  <tr class="text">
+                    <th> Usuario</th>
+                    <th> Tipo</th>
+                    <th> Monto</th>
+                    <th> Fecha</th>
+                  </tr>
+                </thead>
+  
+                <tbody>
+  
+                </tbody>
+        
+              </table>
+            </div>
 
-              <tbody>
-
-              </tbody>
-      
-            </table>
           </section>
     
         </section>
@@ -155,19 +158,59 @@
               </form>
             </div>
 
-            <p class="my-5 text" id="payment-resume">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary hide credit-payument-modal" data-bs-toggle="modal" data-bs-target="#credit-payument-modal">
+            </button>
 
-            </p>
-            
+            <!-- Modal -->
+            <div class="modal fade" id="credit-payument-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text" id="exampleModalLabel">Recibido!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="my-5 text" id="payment-resume"></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary hide" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning text credit-payument-modal-btn ">Aceptar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- REJECTION -->
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary hide credit-payument-reject-modal" data-bs-toggle="modal" data-bs-target="#credit-payument-reject-modal">
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="credit-payument-reject-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text" id="exampleModalLabel">Lo sentimos!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="my-5 text" id="credit-payument-reject-resume"></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-warning text " data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning text credit-payument-reject-modal-btn hide ">Aceptar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+                       
           </section>
     
         </section> 
 
       </div>
-
-
-
-      
 
       <div class="col-sm-12  col-lg-6  mx-auto d-flex align-items-lg-end justify-content-center flex-column mb-5 main__signinPicture">
         <img src="./assets/imgs/user-page.png" class="user-image" alt="Logo principal de Vader Bank" loading="lazy">
@@ -233,17 +276,12 @@
     <!-- bootstrap's script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-    <!-- JQUERY -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
     <!-- scripts -->
     <script src="./scripts/index.js"></script>
     <script src="./scripts/users/user.js"></script>
     <script src="./scripts/pages/user-panel.js"></script>
     <script src="./scripts/pages/delete.js"></script>
 
-
   </body>
-
 
 </html>

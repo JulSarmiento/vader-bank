@@ -69,7 +69,12 @@
 
       <section class="col-xl-6">
         <h2 class="subtitle">Solicitar Credito</h2>
-        <p class="text">Para poder solicitar uno de nuestros exclusivos creditos, ten encuenta de que unicamente aceptamos solicitudes desde $1.000.000 COP. La taza de interes depende del numero de </p>
+        <p class="text">
+          Para poder solicitar uno de nuestros exclusivos creditos, ten encuenta de que unicamente aceptamos solicitudes desde $1.000.000 COP. La taza de interes depende del numero de cuotas deseas. 
+          <br>
+          <br> 
+          Solo podemos otorgarte un credito a la vez
+        </p>
         
         <div class=" my-5 balance__cardContainer">
           <img src="./assets/imgs/credit-card.png" class="img-fluid debit-card" alt="Imagen de una tarjeta de debito">
@@ -96,14 +101,64 @@
 
                 <section id="resume-container" class="hide">
                   <div id="resume-text">
-                  
+                    <p id="negation-text"></p>
                   </div>
 
                 </section>
               </div>   
       
             </form>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary hide credit-modal" data-bs-toggle="modal" data-bs-target="#credit-modal">
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="credit-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text" id="exampleModalLabel">Transferencia Exitosa!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p class="my-5 text" id="credit-resume"></p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary hide" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning text credit-modal-btn ">Aceptar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <!-- REJECTION -->
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary hide credit-reject-modal" data-bs-toggle="modal" data-bs-target="#credit-reject-modal">
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="credit-reject-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text" id="exampleModalLabel">Lo sentimos!</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p class="my-5 text" id="credit-reject-resume"></p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-warning text " data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-warning text credit-reject-modal-btn hide ">Aceptar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
 
           <div class="my-5 d-flex justify-content-center align-content-center align-items-center flex-column ">
             <img loading="lazy" class=" qr-picture hide" src="./assets/imgs/QR.jpg" alt="imagen de referencia de un qr">
@@ -176,9 +231,6 @@
 
     <!-- bootstrap's script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
-    <!-- JQUERY -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
     <!-- scripts -->
     <script src="./scripts/index.js"></script>

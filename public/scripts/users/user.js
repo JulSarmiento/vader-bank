@@ -93,83 +93,38 @@ class UserFactory{
   static addNewUser(fullname, age, email, dniNumber, password, rePassword) {
 
     if(UserFactory.findOne(dniNumber) ){
-      alert('El usuario ya existe.');
-      return;
+
+      document.querySelector('#signin-reject-resume').innerHTML = 'El usuario ya existe.';
+      document.querySelector('.signin-reject-modal').click(); 
+
+      return
     }
     
-    if(age < 18){
-      alert('El usuario debe ser mayor de edad para abrir una cuenta con nosotros.');
+    if(password !== rePassword){
+      document.querySelector('#signin-reject-resume').innerHTML = 'Las contraseñas no son iguales.';
+      document.querySelector('.signin-reject-modal').click();
 
-    } else {
+    } else{ 
 
-      if(password !== rePassword){
-        alert('Las contraseñas no son iguales.'); 
-      } else{ 
-        const user = new User(fullname, age, dniNumber, email, password, User.balance, User.movements);
-        UserFactory.users.push(user);
-        UserFactory.save(UserFactory.users);
-        alert(`Bienvenido/a ${fullname}, esperamos que su experiencia en nuestro banco sea digna de sus expectativas.`);
-        window.location.href="./index.html";  
-        return user;
+      const user = new User(fullname, age, dniNumber, email, password, User.balance, User.movements);
+      UserFactory.users.push(user);
+      UserFactory.save(UserFactory.users);
+
+      document.querySelector('.modal-text-signin').innerHTML = `Bienvenido/a ${fullname}, esperamos que su experiencia en nuestro banco sea digna de sus expectativas.`;
+      document.querySelector('.signin-modal').click();
+
+      document.querySelector('.modal-signin-redirect').addEventListener('click', () => {
+        window.location.href="./index.html"; 
+      });
+
+      return user;
+
       }
 
 
-    }
-
   }
 
-  /**
-   * This function order the user's array by name.
-   */
-  static orderUserByName(){
-
-    const orderedUsers = UserFactory.users.sort((a,b) => {
-      return a.name.localeCompare(b.name)
-    });
-
-    orderedUsers.forEach(user => {
-
-      if (user.dni == UserFactory.currentUser.dni) {
-        return;
-        
-      } else {
-        const li = document.createElement('li');
-        const content = user.name;
-        const text = document.createTextNode(content);
-        li.appendChild(text);
-        DomFactory.getUsersList().appendChild(li);
-      }      
-
-    })
-  }
-
-  /**
-   * This function deletes a user by his DNI.
-   * @param {number} dniNumberToDelete 
-   */
-  static deleteUser(dniNumberToDelete){
-
-    if(dniNumberToDelete != UserFactory.currentUser.dni){
-      alert('No es posible elimintar una cuenta diferente a la tuya.');
   
-    } else {
-
-      const index = UserFactory.users.findIndex(user => dniNumberToDelete == user.dni);
-
-      if (index >= 0) {
-        UserFactory.users.splice(index, 1);
-        alert(`El usuario ${dniNumberToDelete} fue eliminado.`);
-        console.log(UserFactory.users);
-        AuthFactory.logOut();
-
-      } else {
-        alert('El usuario no existe');
-
-      }
-    }
- 
-  }
-
 }
 
 
@@ -195,18 +150,13 @@ class AuthFactory{
 
       localStorage.setItem('Users', JSON.stringify(UserFactory.users));
       
-      // UserFactory.currentUser.movements.forEach(movement => {
-      //   const li = document.createElement('li');
-      //   const content = movement;
-      //   const text = document.createTextNode(content);
-      //   li.appendChild(text);
-      //   DomFactory.getTransactions().appendChild(li);
-      // });
-
       window.location.href="./user.html";  
 
     } else{
-      alert('Contraseña erroneo, por favor, vuelva a ientar');
+      document.querySelector('#login-reject-resume').innerHTML = 'usuario o Contraseña erroneo, por favor vuelva a intentar.';
+
+      document.querySelector('.login-reject-modal').click();
+
     }
   }
 

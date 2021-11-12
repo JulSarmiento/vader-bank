@@ -8,7 +8,19 @@
 
   @include responsive(largeTablet)
 
-  
+.table-mod
+  height: 30rem
+  overflow-y: scroll
+
+::-webkit-scrollbar
+  width: 8px
+
+::-webkit-scrollbar-thumb
+  background: #ffc107a1
+  border-radius: 14px
+
+::-webkit-scrollbar-thumb:hover
+  background: #deac1696
 
 .main__balance
 
@@ -29,7 +41,12 @@
       left: 87%
       transform: translate(-50%, -50%)
 
+      @include responsive(tablet)
+        left: 75%
 
+      @include responsive(desktop)
+        left: 80%
+      
 .userAvatar
   width: 8rem
 

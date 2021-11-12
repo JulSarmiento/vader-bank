@@ -8,8 +8,14 @@ function reception(description, amount){
     validator.balance += amount;
     validator.movements.push({name: description, type: 'Recepcion', amount, date });
     localStorage.setItem('Users', JSON.stringify(UserFactory.users));
-    alert (`Recepcion exitosa por ${formatPrice(amount)}, su nuevo saldo es de: ${formatPrice(validator.balance)}`);
-  }, 5000);
+
+    document.querySelector('.reception-modal').click();
+    document.querySelector('#reception-resume').innerHTML = `Recepcion exitosa por ${formatPrice(amount)}, su nuevo saldo es de: ${formatPrice(validator.balance)}`
+
+    document.querySelector('.reception-modal-btn').addEventListener('click', () => {
+      window.location.href = './user.html'
+    })
+  }, 3000);
 
 }
 

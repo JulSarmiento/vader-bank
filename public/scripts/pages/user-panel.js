@@ -18,11 +18,11 @@ window.addEventListener('load', () => {
 
   document.querySelector('#transactions tbody').innerHTML = '';
 
-  $('#credit-balance').html(formatPrice(validator.credit));
+  document.querySelector('#credit-balance').innerHTML = (formatPrice(validator.credit));
   
   validator.movements.forEach((movement) => {
     console.log('movement', movement)
-   $('#transactions tbody').append( `    
+    document.querySelector('#transactions tbody').insertAdjacentHTML('beforeEnd', `    
       <tr class="text">
       <td>${movement.name}</td>
       <td>${movement.type}</td>
@@ -53,8 +53,6 @@ window.addEventListener('load', () => {
       document.getElementById('total-credit-due').innerHTML = formatPrice(validator.credit);
     }
 
-
-
   })
 
   const otherValueInput = document.querySelector('#other-value-payment input');
@@ -76,7 +74,7 @@ window.addEventListener('load', () => {
   /**
    * This evente submit the credit form data to process and allow the credit payment, also add the information in the current user's movements array
    */
-  $('#credit-payment-form').submit( (event) => {
+  document.querySelector('#credit-payment-form').addEventListener('submit', (event) => {
 
     event.preventDefault();
 
@@ -91,7 +89,8 @@ window.addEventListener('load', () => {
       payment = validator.creditDues;
 
       if(payment > validator.balance){
-        alert('No posee los fondos suficientes para el pago.');
+        document.querySelector('#credit-payument-reject-resume').innerHTML = 'No posee los fondos suficientes para el pago.';
+        document.querySelector('.credit-payument-reject-modal').click();
 
       } else {
         validator.balance -= payment;
@@ -101,12 +100,14 @@ window.addEventListener('load', () => {
         UserFactory.save(UserFactory.users);
 
         paymentResume.innerHTML = `El pago a su credito por el valor de <strong>${formatPrice(payment)}</strong> fue exitoso.`;
+        document.querySelector('.credit-payument-modal').click();
 
+        document.querySelector('.credit-payument-modal-btn').addEventListener('click', () => {
+          location.reload();
+        })
+        
         document.getElementById('balance').innerHTML = formatPrice(validator.balance);
         document.getElementById('total-credit-due').innerHTML = formatPrice(validator.credit);
-
-
-
       }
 
 
@@ -115,59 +116,55 @@ window.addEventListener('load', () => {
       payment = validator.credit;
 
       if(payment > validator.balance){
-        alert('No posee los fondos suficientes para el pago.');
+        document.querySelector('#credit-payument-reject-resume').innerHTML = 'No posee los fondos suficientes para el pago.';
+        document.querySelector('.credit-payument-reject-modal').click();
 
       } else {
         validator.balance -= payment;
         validator.credit -= payment;
 
-
         validator.movements.push({name: 'Credito', type: 'Pago', amount: payment, date});
         UserFactory.save(UserFactory.users);
+
         paymentResume.innerHTML = `El pago a su credito por el valor de <strong>${formatPrice(payment)}</strong> fue exitoso.`;
+        document.querySelector('.credit-payument-modal').click();
+
+        document.querySelector('.credit-payument-modal-btn').addEventListener('click', () => {
+          location.reload();
+        })
+        
         document.getElementById('balance').innerHTML = formatPrice(validator.balance);
         document.getElementById('total-credit-due').innerHTML = formatPrice(validator.credit);
 
       }
 
-
     }else if( payment == '2'){
 
-
       if(otherValue > validator.balance){
-        alert('No posee los fondos suficientes para el pago.');
+        document.querySelector('#credit-payument-reject-resume').innerHTML = 'No posee los fondos suficientes para el pago.';
+        document.querySelector('.credit-payument-reject-modal').click();
+
 
       } else {
         validator.balance -= otherValue;
         validator.credit -= payment;
-        validator.movements.push({name: 'Credito', type: 'Pago', amount: payment});
+        validator.movements.push({name: 'Credito', type: 'Pago', amount: payment, date});
         UserFactory.save(UserFactory.users);
-        paymentResume.innerHTML = `El pago a su credito por el valor de <strong>${formatPrice(otherValue)}</strong> fue exitoso.`;
+
+        paymentResume.innerHTML = `El pago a su credito por el valor de <strong>${formatPrice(payment)}</strong> fue exitoso.`;
+        document.querySelector('.credit-payument-modal').click();
+
+        document.querySelector('.credit-payument-modal-btn').addEventListener('click', () => {
+          location.reload();
+        })
+        
         document.getElementById('balance').innerHTML = formatPrice(validator.balance);
         document.getElementById('total-credit-due').innerHTML = formatPrice(validator.credit);
 
-
       }
-
 
     }
 
-
-
   })
 
-
-
 })
-
-
-
-
-
-
-
-
-
-
-
-
