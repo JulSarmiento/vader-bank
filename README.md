@@ -41,11 +41,6 @@ Vader Bank utiliza los siguientes features:
 - Github Actions para despliegue on push.
 - Documentacion con estandar de JSDoc.
 
-##  Reporte de Performance
-
-[![badge](https://img.shields.io/badge/Performance-91%-brightgreen)](https://gtmetrix.com/reports/vader-bank.web.app/cYhYqaVv/)
-[![Performance badge](https://img.shields.io/badge/Performance-91%-brightgreen>)](https://gtmetrix.com/reports/vader-bank.web.app/cYhYqaVv/)
-
 ## Licencia
 
 MIT
