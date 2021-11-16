@@ -5,8 +5,9 @@ window.addEventListener('load', () => {
   const showMovementsTableBtn = document.getElementById('show-movements');
   const movementsTable = document.getElementById('movements-table');
   const showCreditPaymentForm = document.getElementById('payment-form-container');
-    
 
+  const creditBalance = document.querySelector('#credit-balance');
+    
   UserFactory.init();
   
   let validator = UserFactory.users.find(user => UserFactory.currentUser == user.dni);
@@ -18,8 +19,13 @@ window.addEventListener('load', () => {
   document.getElementById('user-date').innerHTML = `<small>Ultimo logeo: ${new Intl.DateTimeFormat('en-US').format(new Date())}</small>`
 
   document.querySelector('#transactions tbody').innerHTML = '';
+  
+  if(validator.credit > 0){
+    creditBalance.innerHTML = (formatPrice(validator.credit));
 
-  document.querySelector('#credit-balance').innerHTML = (formatPrice(validator.credit));
+  } else{
+    creditBalance.innerHTML = '';
+  }
   
   validator.movements.forEach((movement) => {
     console.log('movement', movement)
@@ -32,26 +38,25 @@ window.addEventListener('load', () => {
      </tr>`)
   })
 
-  /**
-   * This evente toggle the "hide" class 
-   */
+
   showMovementsTableBtn.addEventListener('click', (event) =>{
     event.preventDefault();
     movementsTable.classList.toggle('hide');
-
   })
 
   document.getElementById('credit-show-panel').addEventListener('click', (event) => {
     event.preventDefault();
-    showCreditPaymentForm.classList.toggle('hide');
-
+    
     if(!validator.credit || !validator.creditDues){
+
       document.getElementById('minimun-due').innerHTML = '';
       document.getElementById('total-credit-due').innerHTML = '';
+      
 
     } else{
       document.getElementById('minimun-due').innerHTML = formatPrice(validator.creditDues);
       document.getElementById('total-credit-due').innerHTML = formatPrice(validator.credit);
+      showCreditPaymentForm.classList.toggle('hide');
     }
 
   })
@@ -70,7 +75,6 @@ window.addEventListener('load', () => {
       }
     });
   })
-
 
   /**
    * This evente submit the credit form data to process and allow the credit payment, also add the information in the current user's movements array

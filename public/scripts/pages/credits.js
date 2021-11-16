@@ -29,9 +29,7 @@ function printResume(amount,dues, tax, totalDues){
     </div>
   ` ); 
 
-
 }
-
 
 /**
  * This function add the credit information to the current user and save it in the localstorage
@@ -47,7 +45,6 @@ function addCreditToUser(amount, totalDues){
     document.querySelector('.credit-reject-modal-btn').addEventListener('click', () => {
       window.location.href = './user.html';
     }) 
-
 
   } else {
     validator.credit = amount;
@@ -69,7 +66,9 @@ function addCreditToUser(amount, totalDues){
 
 }
 
-
+/**
+ * 
+ */
 window.addEventListener('load', () => {
 
   UserFactory.init();

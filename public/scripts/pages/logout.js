@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 window.addEventListener('load', () => {
   /**
    * Event button on click

@@ -1,5 +1,5 @@
+// Current User from LocalStorage
 let validator;
-
 
 /**
  * This class manage all the transactions avaible for the users acounts.

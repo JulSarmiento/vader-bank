@@ -1,5 +1,10 @@
 let validator;
 
+/**
+ * 
+ * @param {string} description 
+ * @param {number} amount 
+ */
 function reception(description, amount){
   setTimeout(() => {
 
@@ -18,15 +23,18 @@ function reception(description, amount){
 
 }
 
+/** 
+ * 
+*/
 window.addEventListener('load', () => {
 
   UserFactory.init();
 
   validator = UserFactory.users.find(user => UserFactory.currentUser == user.dni);
 
-  // if(!validator){
-  //   window.location.href = './index.html';
-  // }
+  if(!validator){
+    window.location.href = './index.html';
+  }
   
   document.getElementById('reception-form').addEventListener('submit', (event) => {
     event.preventDefault();
@@ -57,10 +65,6 @@ window.addEventListener('load', () => {
 
     }, 2000)
     
-
-
-    
   })
-
 
 })

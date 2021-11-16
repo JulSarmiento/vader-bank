@@ -43,7 +43,6 @@ class UserFactory{
    */
   static currentUser;
 
-
   /**
    * This function load the localstorage
    */
@@ -81,8 +80,6 @@ class UserFactory{
     return UserFactory.users.find(user => dni == user.dni);
   }
   
-
-
   /**
    * This function adds a new user
    * @returns {object} returns the created user.
