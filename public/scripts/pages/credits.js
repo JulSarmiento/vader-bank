@@ -1,6 +1,6 @@
 let validator;
 let dues;
-let duesToShow
+let duesToShow;
 
 /**
  *  * This function print the resume for the credit. 
@@ -15,9 +15,9 @@ function printResume(amount,dues, tax, totalDues){
   ` 
     <h2 class="my-3 text-center text"><strong>Resumen!</strong></h2>
     <p id="credit-result " class="text-center text">
-      Para el credito se maneja la tasa de interes del <strong>${tax*10}%</strong>. El monto 
+      Para el crédito se maneja la tasa de interés del <strong>${tax*10}%</strong>. El monto 
       deseado es de <strong>${formatPrice(amount)}</strong>, que sera diferido a <strong>${dues}</strong> cuotas. El valor de sus cuotas 
-      mensuales con la tasa de interes correspondientes es de:
+      mensuales con la tasa de interés correspondiente es de:
       <br>
       <br>
       <strong>${formatPrice(totalDues)} COP</strong>
@@ -39,7 +39,7 @@ function printResume(amount,dues, tax, totalDues){
 function addCreditToUser(amount, totalDues){
   if(validator.credit){
 
-    document.querySelector('#credit-reject-resume').innerHTML = `Actualmente ya cuenta con un credito de nuestro banco por un monto de ${formatPrice(validator.credit)}, para poder adquirir otro, debe cancelar el anterior.`;
+    document.querySelector('#credit-reject-resume').innerHTML = `Actualmente ya cuenta con un crédito de nuestro banco por un monto de ${formatPrice(validator.credit)}, para poder adquirir otro, debe cancelar el anterior.`;
     document.querySelector('.credit-reject-modal').click();
 
     document.querySelector('.credit-reject-modal-btn').addEventListener('click', () => {
@@ -55,7 +55,7 @@ function addCreditToUser(amount, totalDues){
     validator.movements.push({name: 'Credito', type: 'Recepcion', amount, date });
     UserFactory.save(UserFactory.users);
 
-    document.querySelector('#credit-resume').innerHTML = `Su Credito ha sido aprobado por un valor de: ${formatPrice(amount)}, el dinero ha sido depositado en su cuenta de credito.`;
+    document.querySelector('#credit-resume').innerHTML = `Su crédito ha sido aprobado por un valor de: ${formatPrice(amount)}, el dinero ha sido depositado en su cuenta de crédito.`;
     document.querySelector('.credit-modal').click();
 
     document.querySelector('.credit-modal-btn').addEventListener('click', () => {
@@ -67,7 +67,7 @@ function addCreditToUser(amount, totalDues){
 }
 
 /**
- * 
+ * This event load the information saved in the localstorage
  */
 window.addEventListener('load', () => {
 
@@ -76,7 +76,7 @@ window.addEventListener('load', () => {
   validator = UserFactory.users.find(user => UserFactory.currentUser == user.dni);
 
   /**
-   * This event capture the form information.
+   * This event capture the form information and validate the credit's due to set a tax value.
    */
   document.getElementById('credit-form').addEventListener('submit', (event) => {
     event.preventDefault();
@@ -87,7 +87,7 @@ window.addEventListener('load', () => {
 
     if(creditAmount < 1000000){
 
-      document.querySelector('#credit-reject-resume').innerHTML = `El monto minimo para los creditos es de ${formatPrice(1000000)}`;
+      document.querySelector('#credit-reject-resume').innerHTML = `El monto mínimo para los créditos es de ${formatPrice(1000000)}`;
       document.querySelector('.credit-reject-modal').click();
       return
     };

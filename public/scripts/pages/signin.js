@@ -1,6 +1,6 @@
 
 /**
- * This envent
+ * This envent load the localstorage information.
  */
 window.addEventListener('load', () => {
 

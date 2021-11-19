@@ -24,7 +24,7 @@ function reception(description, amount){
 }
 
 /** 
- * 
+ * This event load the information from the localstorage and ser the current user as the "validator".
 */
 window.addEventListener('load', () => {
 
@@ -36,6 +36,9 @@ window.addEventListener('load', () => {
     window.location.href = './index.html';
   }
   
+  /**
+   * This event capture the information sended by the reception's form.
+   */
   document.getElementById('reception-form').addEventListener('submit', (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -47,6 +50,7 @@ window.addEventListener('load', () => {
 
     const URL = "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://qrco.de/bcY8vX";
 
+    // This set time out let the chargin animation took a little longer that it does before to show the QR in the fetch.
     setTimeout(() => {
       fetch(URL)
       .then(response => response.blob())

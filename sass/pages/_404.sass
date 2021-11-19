@@ -1,0 +1,21 @@
+@import "../_mixins"
+@import "../_variables"
+
+
+.not-found-picture
+  height: 30rem
+  width: 30rem
+  border-bottom: 5px solid #EEBA2B
+
+  @include responsive(tablet)
+    height: 60rem
+    width: 60rem
+
+  @include responsive(largeTablet)
+    height: 80rem
+    width: 80rem
+  
+  @include responsive(desktop)
+    height: 80rem
+    width: 80rem
+  

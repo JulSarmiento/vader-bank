@@ -32,7 +32,7 @@
     <link rel="manifest" href="./assets/favicon/manifest.json">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="./assets/favicon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#EEBA2B">
+    <meta name="theme-color" content="#EEBA2B"> 
 
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
@@ -47,7 +47,7 @@
     <!-- style sheet -->
     <link rel="stylesheet" href="./styles/style.css">
 
-    <title>VADER BANK | USER</title>
+    <title>VADER BANK | USUARIO </title>
   </head>
   <body>
 
@@ -76,10 +76,10 @@
                 <a class="nav-link text " href="./reception.html">Recibir Dinero</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text " href="./credits.html">Creditos</a>
+                <a class="nav-link text " href="./credits.html">Créditos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text logout"  href="./index.html">Cerrar Sesion</a>
+                <a class="nav-link text logout"  href="./index.html">Cerrar Sesión</a>
               </li>
               
             </ul>
@@ -100,7 +100,7 @@
           <img src="assets/imgs/avatar.png" class=" userAvatar" alt=" Foto del usuario logeado">
           <div>
             <h2 class="text-center text" id="user-name"></h2>
-            <h3 class="text-center text" id="user-date" ><small>Ultimo logeo: {fecha}</small></h3>
+            <h3 class="text-center text" id="user-date" ><small>Último logeo: {fecha} </small></h3>
           </div>
           
         </div>
@@ -111,7 +111,7 @@
     
           <div class=" balance__cardContainer">
             <a href="" id="show-movements"><img src="./assets/imgs/debit-card.png" class="img-fluid debit-card" alt="Imagen de una tarjeta de debito"></a>
-            <p class="text-warning text text--mod centered" id="balance">{Balance}</p>
+            <p class="text-warning text text--mod centered" id="balance"></p>
           </div>
     
           <!-- 
@@ -125,10 +125,10 @@
               <table id="transactions" class="table text">
                 <thead>
                   <tr class="text">
-                    <th> Usuario</th>
-                    <th> Tipo</th>
-                    <th> Monto</th>
-                    <th> Fecha</th>
+                    <th>Referencia</th>
+                    <th>Tipo</th>
+                    <th>Monto</th>
+                    <th>Fecha</th>
                   </tr>
                 </thead>
   
@@ -144,7 +144,7 @@
         </section>
     
         <section class="main__balance animate">
-          <h2  class="my-5 subtitle">Credito</h2>
+          <h2  class="my-5 subtitle">Crédito</h2>
     
           <div class=" balance__cardContainer">
             <a id="credit-show-panel"><img src="./assets/imgs/credit-card.png" class="img-fluid debit-card" alt="Imagen de una tarjeta de debito"></a>
@@ -155,17 +155,17 @@
           <section id="payment-form-container" class="hide">
 
             <div class="d-flex justify-content-center flex-column animate">
-              <h3 class="mt-5 subtitle">Selecciona Monto a Pagar:</h3>
+              <h3 class="mt-5 subtitle">Selecciona el Monto a Pagar:</h3>
               <form id="credit-payment-form"  action=""> 
         
                 <div class="my-3 d-flex justify-content-start align-items-center align-content-center flex-row gap-3">
                   <input type="radio"  class="text" checked name="credit-payment-Option" id="payment-minimun-due" value="0">
-                  <label class="text" for="payment-minimun-due">Cuota minima: <span id="minimun-due" class="text"><strong>numerito</strong></span></label>
+                  <label class="text" for="payment-minimun-due">Cuota mínima: <span  class="text"><strong id="minimun-due"></strong></span></label>
                 </div>
     
                 <div class="my-3 d-flex justify-content-start align-items-center align-content-center flex-row gap-3">
                   <input type="radio"  class="text"  name="credit-payment-Option" id="payment-total-credit" value="1">
-                  <label class="text" for="payment-total-credit">Pago total: <span id="total-credit-due" class="text"><strong>numerito</strong></span></label>
+                  <label class="text" for="payment-total-credit">Pago total: <span  class="text"><strong id="total-credit-due"></strong></span></label>
                 </div>
 
                 <div class="my-3 d-flex justify-content-start align-items-center align-content-center flex-row gap-3">
@@ -195,14 +195,14 @@
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title text" id="exampleModalLabel">Recibido!</h5>
+                    <h5 class="modal-title text" id="exampleModalLabel">¡Recibido!</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <p class="my-5 text" id="payment-resume"></p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary hide" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary hide" data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-warning text credit-payument-modal-btn ">Aceptar</button>
                   </div>
                 </div>
@@ -220,14 +220,14 @@
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title text" id="exampleModalLabel">Lo sentimos!</h5>
+                    <h5 class="modal-title text" id="exampleModalLabel">¡Lo sentimos!</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
                     <p class="my-5 text" id="credit-payument-reject-resume"></p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-warning text " data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning text " data-bs-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-warning text credit-payument-reject-modal-btn hide ">Aceptar</button>
                   </div>
                 </div>
@@ -262,30 +262,30 @@
         </li>
 
         <li class="nav-item"> 
-          <a href="" class="nav-link px-2 text-muted text" data-bs-toggle="modal" data-bs-target="#exampleModal">Contactanos</a>
+          <a href="" class="nav-link px-2 text-muted text" data-bs-toggle="modal" data-bs-target="#exampleModal">Contáctanos</a>
         
           <!-- modal -->
           <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title text" id="exampleModalLabel">Contactanos!</h5>
+                  <h5 class="modal-title text" id="exampleModalLabel">¡Contáctanos!</h5>
                   <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <form>
                     <div class="mb-3">
-                      <label for="recipient-name" class="col-form-label text">Correo Electronico</label>
-                      <input type="email" class="form-control text" id="recipient-name">
+                      <label for="recipient-name" class="col-form-label text">Correo Electrónico</label>
+                      <input type="email" class="form-control text" id="recipient-name"  required>
                     </div>
                     <div class="mb-3">
-                      <label for="message-text" class="col-form-label text">Dejanos tu mensaje:</label>
-                      <textarea class="form-control" id="message-text"></textarea>
+                      <label for="message-text" class="col-form-label text">Déjanos tu mensaje:</label>
+                      <textarea class="form-control" id="message-text" required></textarea>
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Enviar</button>
+                  <button type="button" class="btn btn-warning text" data-bs-dismiss="modal">Enviar</button>
                 </div>
               </div>
             </div>
@@ -293,7 +293,7 @@
         </li>
 
         <li class="nav-item"> 
-          <a href="" class="nav-link px-2 text-muted text">Ubicacion</a>
+          <a href="" class="nav-link px-2 text-muted text">Ubicación</a>
         </li>
 
       </ul>

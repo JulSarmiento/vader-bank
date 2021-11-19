@@ -1,12 +1,12 @@
 
 /**
- * This envent
+ * This envent load the information from the localstorage.
  */
 window.addEventListener('load', () => {
 
-
   localStorage.removeItem('Current-User');
   UserFactory.init();
+  
   /**
    * Login event get the form data for login: user's dni and password. 
    * 

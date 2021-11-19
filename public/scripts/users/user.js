@@ -29,12 +29,12 @@ class User{
 }
 
 /**
- * This class manage the user's process, like adding, finding and deleting.
+ * This class manage the user's process, like adding, setting the current user and finding one user.
  */
 class UserFactory{
 
   /**
-   * Set the users array. Contains some users for testing.
+   * Set the users array. 
    */
   static users = [];
 
@@ -118,12 +118,9 @@ class UserFactory{
 
       }
 
-
   }
-
   
 }
-
 
 /**
  * This class mangane all the auth process for the users like login and logout.

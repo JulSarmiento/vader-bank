@@ -1,5 +1,5 @@
 /**
- * This envent
+ * This envent load the information from the localstorage, set the current user as "validator" and print the movement's array.
  */
 window.addEventListener('load', () => {
   const showMovementsTableBtn = document.getElementById('show-movements');
@@ -39,11 +39,17 @@ window.addEventListener('load', () => {
   })
 
 
+  /**
+   * This event capture the click event for toggle the hide class and show the movement's table.
+   */
   showMovementsTableBtn.addEventListener('click', (event) =>{
     event.preventDefault();
     movementsTable.classList.toggle('hide');
   })
 
+  /**
+   * This event toggle the credit's panel.
+   */
   document.getElementById('credit-show-panel').addEventListener('click', (event) => {
     event.preventDefault();
     
@@ -63,6 +69,9 @@ window.addEventListener('load', () => {
 
   const otherValueInput = document.querySelector('#other-value-payment input');
 
+  /**
+   * This event capture a change in the selection for the radio buttons.
+   */
   document.querySelectorAll('#payment-form-container input[type="radio"]').forEach(radio => {
     radio.addEventListener('change', (event) => {
       const {value} = event.target;
@@ -104,7 +113,7 @@ window.addEventListener('load', () => {
         validator.movements.push({name: 'Credito', type: 'Pago', amount: payment, date});
         UserFactory.save(UserFactory.users);
 
-        paymentResume.innerHTML = `El pago a su credito por el valor de <strong>${formatPrice(payment)}</strong> fue exitoso.`;
+        paymentResume.innerHTML = `El pago a su crédito por el valor de <strong>${formatPrice(payment)}</strong> fue exitoso.`;
         document.querySelector('.credit-payument-modal').click();
 
         document.querySelector('.credit-payument-modal-btn').addEventListener('click', () => {
@@ -131,7 +140,7 @@ window.addEventListener('load', () => {
         validator.movements.push({name: 'Credito', type: 'Pago', amount: payment, date});
         UserFactory.save(UserFactory.users);
 
-        paymentResume.innerHTML = `El pago a su credito por el valor de <strong>${formatPrice(payment)}</strong> fue exitoso.`;
+        paymentResume.innerHTML = `El pago a su crédito por el valor de <strong>${formatPrice(payment)}</strong> fue exitoso.`;
         document.querySelector('.credit-payument-modal').click();
 
         document.querySelector('.credit-payument-modal-btn').addEventListener('click', () => {
@@ -156,7 +165,7 @@ window.addEventListener('load', () => {
         validator.movements.push({name: 'Credito', type: 'Pago', amount: payment, date});
         UserFactory.save(UserFactory.users);
 
-        paymentResume.innerHTML = `El pago a su credito por el valor de <strong>${formatPrice(payment)}</strong> fue exitoso.`;
+        paymentResume.innerHTML = `El pago a su crédito por el valor de <strong>${formatPrice(payment)}</strong> fue exitoso.`;
         document.querySelector('.credit-payument-modal').click();
 
         document.querySelector('.credit-payument-modal-btn').addEventListener('click', () => {

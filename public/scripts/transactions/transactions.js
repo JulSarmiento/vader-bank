@@ -54,6 +54,9 @@ class Transactions{
   }
 }
 
+/**
+ * This event load the information from the localstorage, set the current user as the "validator".
+ */
 window.addEventListener('load', () => {
 
   UserFactory.init();
