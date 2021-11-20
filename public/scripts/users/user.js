@@ -1,6 +1,3 @@
-/**
- * This is the user class
- */
 class User{
   /**
    * 

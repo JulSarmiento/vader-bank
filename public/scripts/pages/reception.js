@@ -4,6 +4,8 @@ let validator;
  * 
  * @param {string} description 
  * @param {number} amount 
+ * 
+ * @listens receptionForm
  */
 function reception(description, amount){
   const date = new Intl.DateTimeFormat('en-US').format(new Date())
@@ -33,6 +35,8 @@ window.addEventListener('load', () => {
   
   /**
    * This event capture the information sended by the reception's form.
+   * 
+   * @fires recepcion
    */
   document.getElementById('reception-form').addEventListener('submit', (event) => {
     event.preventDefault();

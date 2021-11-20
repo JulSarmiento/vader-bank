@@ -10,6 +10,8 @@ const resumeText = document.getElementById('resume-text');
  * @param {number} dues 
  * @param {number} tax 
  * @param {number} totalDues 
+ * 
+ * @listens resumeContainer
  */
 function printResume(amount,dues, tax, totalDues){
 
@@ -31,6 +33,9 @@ function printResume(amount,dues, tax, totalDues){
     </div>
   `;
 
+  /**
+   * This evente reload the page.
+   */
   document.getElementById('cancel-credit').addEventListener('click', () => {
     location.reload();
   })
@@ -41,6 +46,8 @@ function printResume(amount,dues, tax, totalDues){
  * This function add the credit information to the current user and save it in the localstorage
  * @param {number} amount 
  * @param {number} totalDues 
+ * 
+ * @listens RequesteCredit 
  */
 function addCreditToUser(amount, totalDues){
   const creditRejectResume = document.querySelector('#credit-reject-resume')
@@ -77,6 +84,8 @@ function addCreditToUser(amount, totalDues){
 
 /**
  * This event load the information saved in the localstorage
+ * 
+ * @fires init
  */
 window.addEventListener('load', () => {
 
@@ -154,12 +163,16 @@ window.addEventListener('load', () => {
    
     /**
      * This event allows to call the function to print the credit info.
+     * 
+     * @fires printResume
      */
     document.getElementById('resume-container').classList.toggle('hide');
     printResume(creditAmount, creditDues, dues, totalCreditDues);
 
     /**
      * This event allows to save the credit information after the click event.
+     * 
+     * @fires addCreditToUser
      */
     document.getElementById('request-credit').addEventListener('click', () => {
       addCreditToUser(creditAmount, totalCreditDues);
