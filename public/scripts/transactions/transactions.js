@@ -40,7 +40,7 @@ class Transactions{
         
         validator.movements.push({name: toTransferUser.name, type: 'Envío', amount, date});
         
-        toTransferUser.movements.push({name: validator.name, type: 'Recepcion', amount, date});
+        toTransferUser.movements.push({name: validator.name, type: 'Recepción', amount, date});
  
         localStorage.setItem('Users', JSON.stringify(UserFactory.users));
         document.getElementById('balance-for-transfer').innerHTML = formatPrice(newBalanceUserTransfering);
