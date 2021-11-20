@@ -7,6 +7,9 @@ window.addEventListener('load', () => {
   const showCreditPaymentForm = document.getElementById('payment-form-container');
 
   const creditBalance = document.querySelector('#credit-balance');
+
+  const creditPaymentRejectResume = document.querySelector('#credit-payument-reject-resume');
+  const creditPaymentRejectModal = document.querySelector('.credit-payument-reject-modal');
     
   UserFactory.init();
   
@@ -51,17 +54,20 @@ window.addEventListener('load', () => {
    * This event toggle the credit's panel.
    */
   document.getElementById('credit-show-panel').addEventListener('click', (event) => {
+    const minimunDue = document.getElementById('minimun-due');
+    const totalCreditDue = document.getElementById('total-credit-due');
+    
     event.preventDefault();
     
     if(!validator.credit || !validator.creditDues){
 
-      document.getElementById('minimun-due').innerHTML = '';
-      document.getElementById('total-credit-due').innerHTML = '';
+      minimunDue.innerHTML = '';
+      totalCreditDue.innerHTML = '';
       
 
     } else{
-      document.getElementById('minimun-due').innerHTML = formatPrice(validator.creditDues);
-      document.getElementById('total-credit-due').innerHTML = formatPrice(validator.credit);
+      minimunDue.innerHTML = formatPrice(validator.creditDues);
+      totalCreditDue.innerHTML = formatPrice(validator.credit);
       showCreditPaymentForm.classList.toggle('hide');
     }
 
@@ -103,8 +109,8 @@ window.addEventListener('load', () => {
       payment = validator.creditDues;
 
       if(payment > validator.balance){
-        document.querySelector('#credit-payument-reject-resume').innerHTML = 'No posee los fondos suficientes para el pago.';
-        document.querySelector('.credit-payument-reject-modal').click();
+        creditPaymentRejectResume.innerHTML = 'No posee los fondos suficientes para el pago.';
+        creditPaymentRejectModal.click();
 
       } else {
         validator.balance -= payment;
@@ -130,8 +136,8 @@ window.addEventListener('load', () => {
       payment = validator.credit;
 
       if(payment > validator.balance){
-        document.querySelector('#credit-payument-reject-resume').innerHTML = 'No posee los fondos suficientes para el pago.';
-        document.querySelector('.credit-payument-reject-modal').click();
+        creditPaymentRejectResume.innerHTML = 'No posee los fondos suficientes para el pago.';
+        creditPaymentRejectModal.click();
 
       } else {
         validator.balance -= payment;
@@ -155,9 +161,13 @@ window.addEventListener('load', () => {
     }else if( payment == '2'){
 
       if(otherValue > validator.balance){
-        document.querySelector('#credit-payument-reject-resume').innerHTML = 'No posee los fondos suficientes para el pago.';
-        document.querySelector('.credit-payument-reject-modal').click();
+        creditPaymentRejectResume.innerHTML = 'No posee los fondos suficientes para el pago.';
+        creditPaymentRejectModal.click();
 
+
+      } else if( otherValue > validator.credit){
+        creditPaymentRejectResume.innerHTML = 'No puede ingresar un valor superior a la deuda.';
+        creditPaymentRejectModal.click();
 
       } else {
         validator.balance -= otherValue;

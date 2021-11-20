@@ -6,23 +6,18 @@ let validator;
  * @param {number} amount 
  */
 function reception(description, amount){
-  setTimeout(() => {
+  const date = new Intl.DateTimeFormat('en-US').format(new Date())
+  validator.balance += amount;
+  validator.movements.push({name: description, type: 'Recepcion', amount, date });
+  localStorage.setItem('Users', JSON.stringify(UserFactory.users));
 
-    const date = new Intl.DateTimeFormat('en-US').format(new Date())
-    validator.balance += amount;
-    validator.movements.push({name: description, type: 'Recepcion', amount, date });
-    localStorage.setItem('Users', JSON.stringify(UserFactory.users));
+  document.querySelector('.reception-modal').click();
+  document.querySelector('#reception-resume').innerHTML = `Recepcion exitosa por ${formatPrice(amount)}, su nuevo saldo es de: ${formatPrice(validator.balance)}`
 
-    document.querySelector('.reception-modal').click();
-    document.querySelector('#reception-resume').innerHTML = `Recepcion exitosa por ${formatPrice(amount)}, su nuevo saldo es de: ${formatPrice(validator.balance)}`
-
-    document.querySelector('.reception-modal-btn').addEventListener('click', () => {
-      window.location.href = './user.html'
-    })
-  }, 3000);
-
+  document.querySelector('.reception-modal-btn').addEventListener('click', () => {
+    window.location.href = './user.html';
+  })
 }
-
 /** 
  * This event load the information from the localstorage and ser the current user as the "validator".
 */

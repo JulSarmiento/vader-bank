@@ -89,17 +89,20 @@ class UserFactory{
    */
   static addNewUser(fullname, age, email, dniNumber, password, rePassword) {
 
+    const signinRejectResume = document.querySelector('#signin-reject-resume');
+    const signinRejectModal = document.querySelector('.signin-reject-modal');
+
     if(UserFactory.findOne(dniNumber) ){
 
-      document.querySelector('#signin-reject-resume').innerHTML = 'El usuario ya existe.';
-      document.querySelector('.signin-reject-modal').click(); 
+      signinRejectResume.innerHTML = 'El usuario ya existe.';
+      signinRejectModal.click(); 
 
       return
     }
     
     if(password !== rePassword){
-      document.querySelector('#signin-reject-resume').innerHTML = 'Las contraseñas no son iguales.';
-      document.querySelector('.signin-reject-modal').click();
+      signinRejectResume.innerHTML = 'Las contraseñas no son iguales.';
+      signinRejectModal.click();
 
     } else{ 
 

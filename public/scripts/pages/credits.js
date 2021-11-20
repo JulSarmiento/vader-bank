@@ -2,6 +2,8 @@ let validator;
 let dues;
 let duesToShow;
 
+const resumeText = document.getElementById('resume-text');
+
 /**
  *  * This function print the resume for the credit. 
  * @param {number} amount 
@@ -11,11 +13,11 @@ let duesToShow;
  */
 function printResume(amount,dues, tax, totalDues){
 
-  document.getElementById('resume-text').insertAdjacentHTML('beforeend',  
+  resumeText.innerHTML = 
   ` 
     <h2 class="my-3 text-center text"><strong>Resumen!</strong></h2>
     <p id="credit-result " class="text-center text">
-      Para el crédito se maneja la tasa de interés del <strong>${tax*10}%</strong>. El monto 
+      Para el crédito se maneja la tasa de interés del <strong>${parseFloat((tax*10).toFixed(2))}%</strong>. El monto 
       deseado es de <strong>${formatPrice(amount)}</strong>, que sera diferido a <strong>${dues}</strong> cuotas. El valor de sus cuotas 
       mensuales con la tasa de interés correspondiente es de:
       <br>
@@ -25,9 +27,13 @@ function printResume(amount,dues, tax, totalDues){
  
     <div class="d-flex justify-content-center align-content-center align-items-center flex-row mt-5 gap-5" >
       <button id="request-credit" class="btn btn-warning text">Solicitar</button>
-      <button id="cancel-credit" class="btn btn-warning text" >Cancelar</button>
+      <button id="cancel-credit" type="reset" class="btn btn-warning text" >Cancelar</button>
     </div>
-  ` ); 
+  `;
+
+  document.getElementById('cancel-credit').addEventListener('click', () => {
+    location.reload();
+  })
 
 }
 
@@ -37,10 +43,13 @@ function printResume(amount,dues, tax, totalDues){
  * @param {number} totalDues 
  */
 function addCreditToUser(amount, totalDues){
+  const creditRejectResume = document.querySelector('#credit-reject-resume')
+  const creditRejectModal = document.querySelector('.credit-reject-modal');
+
   if(validator.credit){
 
-    document.querySelector('#credit-reject-resume').innerHTML = `Actualmente ya cuenta con un crédito de nuestro banco por un monto de ${formatPrice(validator.credit)}, para poder adquirir otro, debe cancelar el anterior.`;
-    document.querySelector('.credit-reject-modal').click();
+    creditRejectResume.innerHTML = `Actualmente ya cuenta con un crédito de nuestro banco por un monto de ${formatPrice(validator.credit)}, para poder adquirir otro, debe cancelar el anterior.`;
+    creditRejectModal.click();
 
     document.querySelector('.credit-reject-modal-btn').addEventListener('click', () => {
       window.location.href = './user.html';
@@ -87,8 +96,8 @@ window.addEventListener('load', () => {
 
     if(creditAmount < 1000000){
 
-      document.querySelector('#credit-reject-resume').innerHTML = `El monto mínimo para los créditos es de ${formatPrice(1000000)}`;
-      document.querySelector('.credit-reject-modal').click();
+      creditRejectResume.innerHTML = `El monto mínimo para los créditos es de ${formatPrice(1000000)}`;
+      creditRejectModal.click();
       return
     };
   
@@ -121,6 +130,7 @@ window.addEventListener('load', () => {
         
       } else {
         dues = 0.2;
+
       }
   
     } else {
@@ -130,12 +140,10 @@ window.addEventListener('load', () => {
   
       } else if( creditDues <= 48){
         dues = 0.11;
-  
-        
+          
       } else if (creditDues <= 60){
         dues = 0.16;
-  
-        
+          
       } else {
         dues = 0.17;
   
@@ -143,16 +151,15 @@ window.addEventListener('load', () => {
     }
   
     let totalCreditDues = ((creditAmount / creditDues) * dues) + (creditAmount / creditDues);
- 
-  
+   
     /**
-     * This event allows to call the function to print the credit info
+     * This event allows to call the function to print the credit info.
      */
     document.getElementById('resume-container').classList.toggle('hide');
     printResume(creditAmount, creditDues, dues, totalCreditDues);
 
     /**
-     * This event allows to save the credit information after the click event
+     * This event allows to save the credit information after the click event.
      */
     document.getElementById('request-credit').addEventListener('click', () => {
       addCreditToUser(creditAmount, totalCreditDues);

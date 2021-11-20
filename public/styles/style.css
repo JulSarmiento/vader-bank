@@ -173,12 +173,6 @@
     top: 87%;
     left: 50%;
     transform: translate(-50%, -50%); }
-    @media only screen and (min-width: 768px) and (max-width: 1023px) {
-      .main__balance .balance__cardContainer .centered-two {
-        left: 75%; } }
-    @media only screen and (min-width: 1200px) {
-      .main__balance .balance__cardContainer .centered-two {
-        left: 80%; } }
 
 .userAvatar {
   width: 8rem; }

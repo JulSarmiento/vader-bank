@@ -14,19 +14,22 @@ class Transactions{
    */
   static transfer(dniToTransfer, amount){
 
+    const transferRejectResume = document.querySelector('#transfer-reject-resume')
+    const transferRejectModal = document.querySelector('.transfer-reject-modal')
+
     const toTransferUser = UserFactory.findOne(dniToTransfer);
 
     if(toTransferUser === undefined){
       
-      document.querySelector('#transfer-reject-resume').innerHTML = 'Usuario no encontrado. Por favor revise la informacion ingresada.';
-      document.querySelector('.transfer-reject-modal').click();
+      transferRejectResume.innerHTML = 'Usuario no encontrado. Por favor revise la informacion ingresada.';
+      transferRejectModal.click();
 
       } else{ 
       
       if(amount > validator.balance){
 
-        document.querySelector('#transfer-reject-resume').innerHTML = 'No posee los fondos suficientes para realizar la transferencia.';
-        document.querySelector('.transfer-reject-modal').click();
+        transferRejectResume.innerHTML = 'No posee los fondos suficientes para realizar la transferencia.';
+        transferRejectModal.click();
 
       } else {
         
@@ -91,8 +94,8 @@ function transaction(dniToTransfer, amount){
 
   if(dniToTransfer == validator.dni){
 
-    document.querySelector('#transfer-reject-resume').innerHTML = 'No es posible realizar una transferencia a tu misma cuenta.';
-    document.querySelector('.transfer-reject-modal').click();
+    transferRejectResume.innerHTML = 'No es posible realizar una transferencia a tu misma cuenta.';
+    transferRejectModal.click();
     return
 
   } else {
