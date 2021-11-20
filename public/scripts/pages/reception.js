@@ -8,11 +8,11 @@ let validator;
 function reception(description, amount){
   const date = new Intl.DateTimeFormat('en-US').format(new Date())
   validator.balance += amount;
-  validator.movements.push({name: description, type: 'Recepcion', amount, date });
+  validator.movements.push({name: description, type: 'Recepción', amount, date });
   localStorage.setItem('Users', JSON.stringify(UserFactory.users));
 
   document.querySelector('.reception-modal').click();
-  document.querySelector('#reception-resume').innerHTML = `Recepcion exitosa por ${formatPrice(amount)}, su nuevo saldo es de: ${formatPrice(validator.balance)}`
+  document.querySelector('#reception-resume').innerHTML = `Recepción exitosa por ${formatPrice(amount)}, su nuevo saldo es de: ${formatPrice(validator.balance)}`
 
   document.querySelector('.reception-modal-btn').addEventListener('click', () => {
     window.location.href = './user.html';

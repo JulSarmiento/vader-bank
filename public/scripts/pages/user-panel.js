@@ -116,7 +116,7 @@ window.addEventListener('load', () => {
         validator.balance -= payment;
         validator.credit -= payment;
         
-        validator.movements.push({name: 'Credito', type: 'Pago', amount: payment, date});
+        validator.movements.push({name: 'Crédito', type: 'Pago', amount: payment, date});
         UserFactory.save(UserFactory.users);
 
         paymentResume.innerHTML = `El pago a su crédito por el valor de <strong>${formatPrice(payment)}</strong> fue exitoso.`;
@@ -143,7 +143,7 @@ window.addEventListener('load', () => {
         validator.balance -= payment;
         validator.credit -= payment;
 
-        validator.movements.push({name: 'Credito', type: 'Pago', amount: payment, date});
+        validator.movements.push({name: 'Crédito', type: 'Pago', amount: payment, date});
         UserFactory.save(UserFactory.users);
 
         paymentResume.innerHTML = `El pago a su crédito por el valor de <strong>${formatPrice(payment)}</strong> fue exitoso.`;
@@ -172,7 +172,7 @@ window.addEventListener('load', () => {
       } else {
         validator.balance -= otherValue;
         validator.credit -= payment;
-        validator.movements.push({name: 'Credito', type: 'Pago', amount: payment, date});
+        validator.movements.push({name: 'Crédito', type: 'Pago', amount: payment, date});
         UserFactory.save(UserFactory.users);
 
         paymentResume.innerHTML = `El pago a su crédito por el valor de <strong>${formatPrice(payment)}</strong> fue exitoso.`;

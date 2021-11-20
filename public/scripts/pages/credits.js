@@ -61,7 +61,7 @@ function addCreditToUser(amount, totalDues){
 
     const date = new Intl.DateTimeFormat('en-US').format(new Date())
   
-    validator.movements.push({name: 'Credito', type: 'Recepcion', amount, date });
+    validator.movements.push({name: 'Crédito', type: 'Recepción', amount, date });
     UserFactory.save(UserFactory.users);
 
     document.querySelector('#credit-resume').innerHTML = `Su crédito ha sido aprobado por un valor de: ${formatPrice(amount)}, el dinero ha sido depositado en su cuenta de crédito.`;
