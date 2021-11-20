@@ -38,7 +38,7 @@ class Transactions{
 
         const date = new Intl.DateTimeFormat('en-US').format(new Date());
         
-        validator.movements.push({name: toTransferUser.name, type: 'Envio', amount, date});
+        validator.movements.push({name: toTransferUser.name, type: 'Envío', amount, date});
         
         toTransferUser.movements.push({name: validator.name, type: 'Recepcion', amount, date});
  
