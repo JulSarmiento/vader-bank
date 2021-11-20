@@ -63,8 +63,7 @@ window.addEventListener('load', () => {
 
       minimunDue.innerHTML = '';
       totalCreditDue.innerHTML = '';
-      
-
+    
     } else{
       minimunDue.innerHTML = formatPrice(validator.creditDues);
       totalCreditDue.innerHTML = formatPrice(validator.credit);
@@ -141,6 +140,7 @@ window.addEventListener('load', () => {
       } else {
         validator.balance -= payment;
         validator.credit -= payment;
+        validator.creditDues = 0;
 
         validator.movements.push({name: 'Crédito', type: 'Pago', amount: payment, date});
         UserFactory.save(UserFactory.users);
