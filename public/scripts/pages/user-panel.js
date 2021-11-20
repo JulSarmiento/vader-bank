@@ -103,8 +103,7 @@ window.addEventListener('load', () => {
     const date = new Intl.DateTimeFormat('en-US').format(new Date());
 
     let payment = data.get('credit-payment-Option');
-    const otherValue = parseInt(data.get('other-value-payment'));
-
+    
     if(payment == '0'){
       payment = validator.creditDues;
 
@@ -160,6 +159,8 @@ window.addEventListener('load', () => {
 
     }else if( payment == '2'){
 
+      const otherValue = parseInt(data.get('other-value-payment'));
+
       if(otherValue > validator.balance){
         creditPaymentRejectResume.innerHTML = 'No posee los fondos suficientes para el pago.';
         creditPaymentRejectModal.click();
@@ -171,11 +172,11 @@ window.addEventListener('load', () => {
 
       } else {
         validator.balance -= otherValue;
-        validator.credit -= payment;
-        validator.movements.push({name: 'Crédito', type: 'Pago', amount: payment, date});
+        validator.credit -= otherValue;
+        validator.movements.push({name: 'Crédito', type: 'Pago', amount: otherValue, date});
         UserFactory.save(UserFactory.users);
 
-        paymentResume.innerHTML = `El pago a su crédito por el valor de <strong>${formatPrice(payment)}</strong> fue exitoso.`;
+        paymentResume.innerHTML = `El pago a su crédito por el valor de <strong>${formatPrice(otherValue)}</strong> fue exitoso.`;
         document.querySelector('.credit-payument-modal').click();
 
         document.querySelector('.credit-payument-modal-btn').addEventListener('click', () => {

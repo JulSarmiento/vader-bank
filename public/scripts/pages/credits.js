@@ -64,7 +64,7 @@ function addCreditToUser(amount, totalDues){
     validator.movements.push({name: 'Crédito', type: 'Recepción', amount, date });
     UserFactory.save(UserFactory.users);
 
-    document.querySelector('#credit-resume').innerHTML = `Su crédito ha sido aprobado por un valor de: ${formatPrice(amount)}, el dinero ha sido depositado en su cuenta de crédito.`;
+    document.querySelector('#credit-resume').innerHTML = `Su crédito ha sido aprobado por un valor de: <strong>${formatPrice(amount)} </strong>, el dinero ha sido depositado en su cuenta de crédito.`;
     document.querySelector('.credit-modal').click();
 
     document.querySelector('.credit-modal-btn').addEventListener('click', () => {
